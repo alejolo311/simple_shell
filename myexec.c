@@ -9,6 +9,7 @@
  */
 int myexec(int argc, char **argv)
 {
+	(void) argc;
 	if (execve(argv[0], argv, NULL) == -1)
 	{
 		perror("Error:");
