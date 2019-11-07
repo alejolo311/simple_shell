@@ -9,5 +9,7 @@
 #include <fcntl.h>
 #include <sys/syscall.h>
 
+int myexec(argc, argv);
+int interact();
 
 #endif /* H_SHELL */

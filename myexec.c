@@ -1,18 +1,17 @@
 #include "hsh.h"
 
 /**
- * main - Main function for the simple shell
+ * myexec - Exececutes a command
  * @argc: Quantity of parameters
  * @argv: The end NULL list of parameters
  *
  * Return: Always 0
  */
-int main (int argc, char **argv)
+int myexec(int argc, char **argv)
 {
-	if (argc > 1)
-		myexec(--argc, ++argv);
-	else
-		interact();
-
+	if (execve(argv[0], argv, NULL) == -1)
+	{
+		perror("Error:");
+	}
 	return (0);
 }
