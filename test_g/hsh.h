@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/syscall.h>
+#include <sys/wait.h>
 
 int myexec(int argc, char **argv);
 int interact();
