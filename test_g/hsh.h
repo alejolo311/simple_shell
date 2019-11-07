@@ -10,7 +10,7 @@
 #include <sys/syscall.h>
 #include <sys/wait.h>
 
-int myexec(int argc, char **argv);
+int myexec(int argc, char **argv, char **env);
 int interact();
 
 #endif /* H_SHELL */

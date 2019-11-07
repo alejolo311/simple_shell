@@ -7,7 +7,7 @@
  *
  * Return: Always 0
  */
-int myexec(int argc, char **argv)
+int myexec(int argc, char **argv, char **env)
 {
 pid_t pid;
 int status;
@@ -22,7 +22,7 @@ int status;
 	}
 	else if (pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(argv[0], argv, env) == -1)
 		{
 			perror("Error:");
 		}
