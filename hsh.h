@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <syscalls.h>
+#include <sys/calls.h>
 
 
 #endif /* H_SHELL */
