@@ -2,5 +2,5 @@
 
 int main (void)
 {
-	return ("Hola");
+	return (0);
 }
