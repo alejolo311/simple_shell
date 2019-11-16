@@ -11,6 +11,6 @@
 #include <sys/wait.h>
 
 int myexec(int argc, char **argv, char **env);
-int interact();
+int interac(char **env);
 
 #endif /* H_SHELL */

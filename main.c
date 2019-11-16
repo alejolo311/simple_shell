@@ -7,12 +7,12 @@
  *
  * Return: Always 0
  */
-int main (int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
 	if (argc > 1)
 		myexec(--argc, ++argv, env);
 	else
-		interact();
+		interact(env);
 
 	return (0);
 }
