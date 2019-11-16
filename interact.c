@@ -5,7 +5,8 @@
  *
  * Return: Always 0
  */
-int interact(char char **env)
+int interact(char **env)
 {
+	(void)env;
 	return (0);
 }
