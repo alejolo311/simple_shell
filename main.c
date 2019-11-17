@@ -9,6 +9,11 @@
  */
 int main(int argc, char **argv, char **env)
 {
+
+	char *p;
+
+	p = malloc(25);
+
 	if (argc > 1)
 		myexec(--argc, ++argv, env);
 	else
