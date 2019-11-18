@@ -9,8 +9,10 @@
 #include <fcntl.h>
 #include <sys/syscall.h>
 #include <sys/wait.h>
+#include <string.h>
+#include <dirent.h>
 
 int myexec(int argc, char **argv, char **env);
-int interact(char **env);
+int interact(int argc, char **argv, char **env);
 
 #endif /* H_SHELL */

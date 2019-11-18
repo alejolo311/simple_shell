@@ -10,7 +10,8 @@
 int myexec(int argc, char **argv, char **env)
 {
 pid_t pid;
-int status;
+int status, ret;
+char msg[80];
 
 	(void) argc;
 
@@ -22,13 +23,14 @@ int status;
 	}
 	else if (pid == 0)
 	{
-		if (execve(argv[0], argv, env) == -1)
+		if ((ret = execve(argv[1], (argv + 1), env)) == -1)
 		{
-			perror("Error:");
+			sprintf(msg, "%s: 1: %s: not found\n", argv[0], argv[1]);
+			write(STDERR_FILENO, &msg, strlen(msg));
 		}
 	}
 	else
 		wait(&status);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }

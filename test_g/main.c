@@ -10,9 +10,9 @@
 int main (int argc, char **argv, char **env)
 {
 	if (argc > 1)
-		myexec(--argc, ++argv, env);
+		myexec(argc, argv, env);
 	else
-		interact();
+		interact(argc, argv, env);
 
 	return (0);
 }
