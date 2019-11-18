@@ -10,7 +10,6 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	
 	signal(SIGINT, handsigint);
 
 	if (argc > 1)

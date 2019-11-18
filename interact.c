@@ -2,7 +2,6 @@
 
 /**
  * interact - Exececutes a command
- * @ac: Number of parameters
  * @av: Parameters for the program
  * @env: The variables from the environment
  *
@@ -40,16 +39,14 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
-			token = strtok(str1, " \t\n");
-			argv[j] = token;
+			token = strtok(str1, " \t\n"), argv[j] = token;
 			if (token == NULL)
 				break;
 		}
 		if (argc > 2)
 			myexec(j, argv, env);
-		free(argv);
-		free(tmp);
+		free(argv), free(tmp);
 	} while (read);
 	free(line);
- 	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
