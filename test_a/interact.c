@@ -8,13 +8,14 @@
  *
  * Return: Always 0
  */
-int interact(char **av, char **env)
+int interact(int ac, char **av, char **env)
 {
 size_t len = 0;
 int read = 1, j, argc, inter = 1;
 char *str1, *token, *saveptr1, **argv, *line = NULL;
 
-	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
+	(void) ac;
+	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter = 1;
 	inter == 1 ?  printf("#cisfun$ ") : inter;
 	read = getline(&line, &len, stdin);
 	while (read)
@@ -40,17 +41,18 @@ char *str1, *token, *saveptr1, **argv, *line = NULL;
 			if (token == NULL)
 				break;
 		}
-		if (argc > 2)
-			myexec(j, argv, env);
+		if (myexec(argc, argv, env) != EXIT_SUCCESS)
+		{
+			free(line), perror("InterErr:");
+			return (-1);
+		}
 		if (inter == 1)
 			printf("#cisfun$ ");
-		free(argv);
 		read = getline(&line, &len, stdin);
 		if (strncmp(line, "exit", 4) == 0 || read == -1)
 		{
 			free(line), exit(EXIT_SUCCESS);
 		}
 	}
-	free(line);
- 	return (EXIT_SUCCESS);
+	free(line), return (EXIT_SUCCESS);
 }

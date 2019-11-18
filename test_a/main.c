@@ -4,15 +4,16 @@
  * main - Main function for the simple shell
  * @argc: Quantity of parameters
  * @argv: The end NULL list of parameters
+ * @env: The variables from the environment
  *
  * Return: Always 0
  */
-int main (int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	if (argc > 1)
-		myexec(--argc, ++argv);
+		myexec(argc, argv, env);
 	else
-		interact();
+		interact(argc, argv, env);
 
 	return (0);
 }

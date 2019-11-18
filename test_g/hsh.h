@@ -13,6 +13,6 @@
 #include <dirent.h>
 
 int myexec(int argc, char **argv, char **env);
-int interact(int argc, char **argv, char **env);
+int interact(char **argv, char **env);
 
 #endif /* H_SHELL */

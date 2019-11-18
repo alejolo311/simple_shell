@@ -4,6 +4,7 @@
  * myexec - Exececutes a command
  * @argc: Quantity of parameters
  * @argv: The end NULL list of parameters
+ * @env: The variables from the environment
  *
  * Return: Always 0
  */
@@ -23,7 +24,8 @@ char msg[80];
 	}
 	else if (pid == 0)
 	{
-		if ((ret = execve(argv[1], (argv + 1), env)) == -1)
+		ret = execve(argv[1], (argv + 1), env);
+		if (ret == -1)
 		{
 			sprintf(msg, "%s: 1: %s: not found\n", argv[0], argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));

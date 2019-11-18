@@ -2,29 +2,21 @@
 
 /**
  * interact - Exececutes a command
+ * @ac: Number of parameters
+ * @av: Parameters for the program
+ * @env: Thr variables from the environment
  *
  * Return: Always 0
  */
-int interact(int ac, char **av, char **env)
+int interact(char **av, char **env)
 {
-char *line = NULL;
 size_t len = 0;
-int read = 1, j, argc, inter = 0;
-char *str1, *token;
-char *saveptr1;
-char **argv;
+int read = 1, j, argc, inter = 1;
+char *str1, *token, *saveptr1, **argv, *line = NULL;
 
-	(void) ac;
-	if (isatty(STDIN_FILENO) == 0)
-		inter = 0;
-	else
-		inter = 1;
-
-	if (inter == 1)
-		printf("#cisfun$ ");
-
+	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
+	inter == 1 ?  printf("#cisfun$ ") : inter;
 	read = getline(&line, &len, stdin);
-
 	while (read)
 	{
 		for (argc = 1, str1 = line; ; argc++, str1 = NULL)
@@ -34,15 +26,12 @@ char **argv;
 				break;
 		}
 		argc++;
-
 		argv = malloc((argc + 2) * sizeof(char **));
 		if (argv == NULL)
 		{
-			free(line);
-			perror("Error: ");
-			return(-1);
+			free(line), perror("Error: ");
+			return (-1);
 		}
-
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
@@ -51,24 +40,17 @@ char **argv;
 			if (token == NULL)
 				break;
 		}
-
-		if (myexec(argc, argv, env) != EXIT_SUCCESS)
-		{
-			free(line);
-			perror("InterErr:");
-			return(-1);
-		}
-
+		if (argc > 2)
+			myexec(j, argv, env);
 		if (inter == 1)
 			printf("#cisfun$ ");
+		free(argv);
 		read = getline(&line, &len, stdin);
 		if (strncmp(line, "exit", 4) == 0 || read == -1)
 		{
-			free(line);
-			exit(EXIT_SUCCESS);
+			free(line), exit(EXIT_SUCCESS);
 		}
 	}
-
 	free(line);
-	return (EXIT_SUCCESS);
+ 	return (EXIT_SUCCESS);
 }
