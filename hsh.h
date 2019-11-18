@@ -17,5 +17,6 @@
 int myexec(int argc, char **argv, char **env);
 int interact(char **argv, char **env);
 void handsigint(int sign);
+char *path(char *name, char **env);
 
 #endif /* H_SHELL */

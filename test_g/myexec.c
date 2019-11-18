@@ -12,10 +12,11 @@ int myexec(int argc, char **argv, char **env)
 {
 pid_t pid;
 int status, ret;
-char msg[80];
+char msg[80], *sentence;
 
 	(void) argc;
 
+	sentence = path(argv[1], env);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -24,7 +25,7 @@ char msg[80];
 	}
 	else if (pid == 0)
 	{
-		ret = execve(argv[1], (argv + 1), env);
+		ret = execve(sentence, (argv + 1), env);
 		if (ret == -1)
 		{
 			sprintf(msg, "%s: 1: %s: not found\n", argv[0], argv[1]);
