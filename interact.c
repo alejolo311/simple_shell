@@ -4,7 +4,7 @@
  * interact - Exececutes a command
  * @ac: Number of parameters
  * @av: Parameters for the program
- * @env: Thr variables from the environment
+ * @env: The variables from the environment
  *
  * Return: Always 0
  */
@@ -15,10 +15,13 @@ int read = 1, j, argc, inter = 1;
 char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
-	inter == 1 ?  printf("#cisfun$ ") : inter;
-	read = getline(&line, &len, stdin);
-	while (read)
-	{
+	do {
+		inter == 1 ?  printf("#cisfun$ ") : inter;
+		read = getline(&line, &len, stdin);
+		if (strncmp(line, "exit", 4) == 0 || read == -1)
+		{
+			free(line), exit(EXIT_SUCCESS);
+		}
 		tmp = strdup(line);
 		for (argc = 1, str1 = tmp; ; argc++, str1 = NULL)
 		{
@@ -43,16 +46,9 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		}
 		if (argc > 2)
 			myexec(j, argv, env);
-		if (inter == 1)
-			printf("#cisfun$ ");
 		free(argv);
 		free(tmp);
-		read = getline(&line, &len, stdin);
-		if (strncmp(line, "exit", 4) == 0 || read == -1)
-		{
-			free(line), exit(EXIT_SUCCESS);
-		}
-	}
+	} while (read);
 	free(line);
  	return (EXIT_SUCCESS);
 }
