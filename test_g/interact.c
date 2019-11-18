@@ -37,9 +37,11 @@ char *str1, *token, *saveptr1, **argv, *line = NULL;
 		{
 			token = strtok_r(str1, " \t\n", &saveptr1);
 			argv[j] = token;
+			printf("[%s]", argv[j]);
 			if (token == NULL)
 				break;
 		}
+		printf("\n");
 		if (argc > 2)
 			myexec(j, argv, env);
 		if (inter == 1)
