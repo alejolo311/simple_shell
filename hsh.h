@@ -11,8 +11,11 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <dirent.h>
+#include <ctype.h>
+#include <signal.h>
 
 int myexec(int argc, char **argv, char **env);
 int interact(char **argv, char **env);
+void handsigint(int sign);
 
 #endif /* H_SHELL */

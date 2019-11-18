@@ -20,6 +20,7 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		read = getline(&line, &len, stdin);
 		if (strncmp(line, "exit", 4) == 0 || read == -1)
 		{
+			read == -1 ? printf("\n") : read;
 			free(line), exit(EXIT_SUCCESS);
 		}
 		tmp = strdup(line);
