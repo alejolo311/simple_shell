@@ -14,6 +14,11 @@ int j, k;
 char *str1, *token, *tmp;
 static char **paths = NULL;
 
+	if (strncmp(name, "FLUSH", 5) == 0)
+	{
+		free(paths);
+		return(NULL);
+	}
 	if (access(name, F_OK | R_OK | X_OK) == 0)
 		return (strdup(name));
 	if (paths == NULL)
@@ -25,7 +30,7 @@ static char **paths = NULL;
 				break;
         	i++;
     	}
-		tmp =strdup(env[i]);
+		tmp = strdup(env[i]);
 		for (k = 1, str1 = tmp; ; k++, str1 = NULL)
 		{
 			token = strtok(str1, ":");

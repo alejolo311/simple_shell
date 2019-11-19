@@ -17,5 +17,6 @@ int main(int argc, char **argv, char **env)
 	else
 		interact(argv, env);
 
+	path("FLUSH", env);
 	return (0);
 }

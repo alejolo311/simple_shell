@@ -2,27 +2,31 @@
 
 /**
  * interact - Exececutes a command
- * @ac: Number of parameters
  * @av: Parameters for the program
- * @env: Thr variables from the environment
+ * @env: The variables from the environment
  *
  * Return: Always 0
  */
-int interact(int ac, char **av, char **env)
+int interact(char **av, char **env)
 {
 size_t len = 0;
 int read = 1, j, argc, inter = 1;
-char *str1, *token, *saveptr1, **argv, *line = NULL;
+char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 
-	(void) ac;
-	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter = 1;
-	inter == 1 ?  printf("#cisfun$ ") : inter;
-	read = getline(&line, &len, stdin);
-	while (read)
-	{
-		for (argc = 1, str1 = line; ; argc++, str1 = NULL)
+	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
+	do {
+		inter == 1 ?  printf("#cisfun$ ") : inter;
+		read = getline(&line, &len, stdin);
+		if (strncmp(line, "exit", 4) == 0 || read == -1)
 		{
-			token = strtok_r(str1, " \t\n", &saveptr1);
+			read == -1 && inter == 1 ? printf("\n") : read;
+			free(line);
+			return(EXIT_SUCCESS);
+		}
+		tmp = strdup(line);
+		for (argc = 1, str1 = tmp; ; argc++, str1 = NULL)
+		{
+			token = strtok(str1, " \t\n");
 			if (token == NULL)
 				break;
 		}
@@ -36,23 +40,14 @@ char *str1, *token, *saveptr1, **argv, *line = NULL;
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
-			token = strtok_r(str1, " \t\n", &saveptr1);
-			argv[j] = token;
+			token = strtok(str1, " \t\n"), argv[j] = token;
 			if (token == NULL)
 				break;
 		}
-		if (myexec(argc, argv, env) != EXIT_SUCCESS)
-		{
-			free(line), perror("InterErr:");
-			return (-1);
-		}
-		if (inter == 1)
-			printf("#cisfun$ ");
-		read = getline(&line, &len, stdin);
-		if (strncmp(line, "exit", 4) == 0 || read == -1)
-		{
-			free(line), exit(EXIT_SUCCESS);
-		}
-	}
-	free(line), return (EXIT_SUCCESS);
+		if (argc > 2)
+			myexec(j, argv, env);
+		free(argv), free(tmp);
+	} while (read);
+	free(line);
+	return (EXIT_SUCCESS);
 }

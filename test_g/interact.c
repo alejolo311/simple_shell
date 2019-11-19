@@ -20,7 +20,8 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		if (strncmp(line, "exit", 4) == 0 || read == -1)
 		{
 			read == -1 && inter == 1 ? printf("\n") : read;
-			free(line), exit(EXIT_SUCCESS);
+			free(line);
+			return(EXIT_SUCCESS);
 		}
 		tmp = strdup(line);
 		for (argc = 1, str1 = tmp; ; argc++, str1 = NULL)

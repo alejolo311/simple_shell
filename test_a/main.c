@@ -10,10 +10,13 @@
  */
 int main(int argc, char **argv, char **env)
 {
+	signal(SIGINT, handsigint);
+
 	if (argc > 1)
 		myexec(argc, argv, env);
 	else
-		interact(argc, argv, env);
+		interact(argv, env);
 
+	path("FLUSH", env);
 	return (0);
 }

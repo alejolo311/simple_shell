@@ -30,11 +30,14 @@ char msg[80], *sentence;
 		{
 			sprintf(msg, "%s: 1: %s: not found\n", argv[0], argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
+			free(sentence);
+			path("FLUSH", env);
 			exit(1);
 		}
 	}
 	else
 		wait(&status);
 
+	free(sentence);
 	return (EXIT_SUCCESS);
 }
