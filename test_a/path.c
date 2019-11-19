@@ -1,7 +1,7 @@
 #include "hsh.h"
 
 /**
- * path - Evaluate the name for execution taking into account PATH if necessary.
+ * path - Evaluate the name for execution taking into account PATH if necessary
  * @name: Name of the command to execute
  * @env: The environment
  *
@@ -12,31 +12,24 @@ char *path(char *name, char **env)
 unsigned int i;
 int j, k;
 char *str1, *token, *tmp;
-static char **paths = NULL;
+static char **paths;
 
 	if (strncmp(name, "FLUSH", 5) == 0)
 	{
 		free(paths);
-		return(NULL);
+		return (NULL);
 	}
 	if (access(name, F_OK | R_OK | X_OK) == 0)
 		return (strdup(name));
 	if (paths == NULL)
 	{
-    	i = 0;
-    	while (env[i] != NULL)
-    	{
+		for (i = 0; env[i] != NULL; i++)
 			if (strncmp(env[i], "PATH", 4) == 0)
 				break;
-        	i++;
-    	}
 		tmp = strdup(env[i]);
-		for (k = 1, str1 = tmp; ; k++, str1 = NULL)
-		{
-			token = strtok(str1, ":");
+		for (k = 1, str1 = tmp; (token = strtok(str1, ":")); k++, str1 = NULL)
 			if (token == NULL)
 				break;
-		}
 		free(tmp);
 		paths = malloc(k * sizeof(char **));
 		for (j = 0, str1 = (*(env + i) + 5); ; j++, str1 = NULL)
@@ -46,15 +39,13 @@ static char **paths = NULL;
 				break;
 		}
 	}
-	k = 0;
-	while (paths[k] != NULL)
+	for (k = 0; paths[k] != NULL; k++)
 	{
 		tmp = malloc((strlen(paths[k]) + strlen(name) + 2) * sizeof(char));
 		sprintf(tmp, "%s/%s", paths[k], name);
 		if (access(tmp, F_OK | R_OK | X_OK) == 0)
-			return(tmp);
+			return (tmp);
 		free(tmp);
-		k++;
 	}
 
 	return (NULL);
