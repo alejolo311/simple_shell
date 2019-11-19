@@ -10,19 +10,24 @@
 int interact(char **av, char **env)
 {
 size_t len = 0;
-int read = 1, j, argc, inter = 1;
+int read = 1, j, argc, inter = 1, builtin;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
 		inter == 1 ?  printf("#cisfun$ ") : inter;
 		read = getline(&line, &len, stdin);
-		if (strncmp(line, "exit", 4) == 0 || read == -1)
+		if (read == -1)
 		{
 			read == -1 && inter == 1 ? printf("\n") : read;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
+		builtin = check_builtin(line, env);
+		if (builtin == -19)
+			return(EXIT_SUCCESS);
+		else if (builtin)
+			continue;
 		tmp = strdup(line);
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
