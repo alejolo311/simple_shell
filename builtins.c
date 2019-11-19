@@ -1,6 +1,12 @@
 #include "hsh.h"
-
-int check_builtin(char* builtin, char **env)
+/**
+ * check_builtin - check if the input is a built-in
+ * desc: check if the command in the inpit is a valid built-in
+ * @builtin: the command to check
+ * @env: the enviroment
+ * Return: -19 in exit case, 1 in success, 0 in no exec
+ */
+int check_builtin(char *builtin, char **env)
 {
 
 	if (strncmp(builtin, "exit", 4) == 0)
@@ -13,6 +19,7 @@ int check_builtin(char* builtin, char **env)
 	else if (strncmp(builtin, "env", 3) == 0)
 	{
 		unsigned int i;
+
 		for (i = 0; env[i] != NULL; i++)
 		printf("%s\n", env[i]);
 		return (1);
