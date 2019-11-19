@@ -7,7 +7,7 @@
  *
  * Return: Always 0
  */
-int interact(char **av, char **env)
+int interact(char **av, char **env, unsigned int *execnt)
 {
 size_t len = 0;
 int read = 1, j, argc, inter = 1, builtin;
@@ -47,8 +47,8 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 				break;
 		}
 		if (argc > 2)
-			myexec(j, argv, env);
-		free(argv), free(tmp);
+			myexec(j, argv, env, execnt);
+		free(argv), free(tmp), (*execnt)++;
 	} while (read);
 	free(line);
 	return (EXIT_SUCCESS);

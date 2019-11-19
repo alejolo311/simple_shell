@@ -10,12 +10,14 @@
  */
 int main(int argc, char **argv, char **env)
 {
+unsigned int execnt = 1; /* Count how many executions */
+
 	signal(SIGINT, handsigint);
 
 	if (argc > 1)
-		myexec(argc, argv, env);
+		myexec(argc, argv, env, &execnt);
 	else
-		interact(argv, env);
+		interact(argv, env, &execnt);
 
 	path("FLUSH", env);
 	return (0);

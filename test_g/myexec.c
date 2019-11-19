@@ -8,7 +8,7 @@
  *
  * Return: Always 0
  */
-int myexec(int argc, char **argv, char **env)
+int myexec(int argc, char **argv, char **env, unsigned int *execnt)
 {
 pid_t pid;
 int status, ret;
@@ -28,7 +28,7 @@ char msg[80], *sentence;
 		ret = execve(sentence, (argv + 1), env);
 		if (ret == -1)
 		{
-			sprintf(msg, "%s: 1: %s: not found\n", argv[0], argv[1]);
+			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
 			free(sentence);
 			path("FLUSH", env);

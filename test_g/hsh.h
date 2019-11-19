@@ -14,8 +14,8 @@
 #include <ctype.h>
 #include <signal.h>
 
-int myexec(int argc, char **argv, char **env);
-int interact(char **argv, char **env);
+int myexec(int argc, char **argv, char **env, unsigned int *execnt);
+int interact(char **argv, char **env, unsigned int *execnt);
 void handsigint(int sign);
 char *path(char *name, char **env);
 
