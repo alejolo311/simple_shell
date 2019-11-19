@@ -11,7 +11,7 @@ int interact(char **av, char **env)
 {
 size_t len = 0;
 int read = 1, j, argc, inter = 1;
-char *str1, *token, **argv, *line = NULL, *tmp = NULL;
+char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
@@ -21,15 +21,12 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		{
 			read == -1 && inter == 1 ? printf("\n") : read;
 			free(line);
-			return(EXIT_SUCCESS);
+			return (EXIT_SUCCESS);
 		}
 		tmp = strdup(line);
-		for (argc = 1, str1 = tmp; ; argc++, str1 = NULL)
-		{
-			token = strtok(str1, " \t\n");
-			if (token == NULL)
+		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
+			if (t == NULL)
 				break;
-		}
 		argc++;
 		argv = malloc((argc + 2) * sizeof(char **));
 		if (argv == NULL)
@@ -40,8 +37,8 @@ char *str1, *token, **argv, *line = NULL, *tmp = NULL;
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
-			token = strtok(str1, " \t\n"), argv[j] = token;
-			if (token == NULL)
+			t = strtok(str1, " \t\n"), argv[j] = t;
+			if (t == NULL)
 				break;
 		}
 		if (argc > 2)
