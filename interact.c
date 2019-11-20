@@ -1,5 +1,7 @@
 #include "hsh.h"
 
+char **askmem(int argc, char *line);
+
 /**
  * interact - Exececutes a command
  * @av: Parameters for the program
@@ -27,13 +29,9 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
 				break;
-		argc++;
-		argv = malloc((argc + 2) * sizeof(char **));
+		argv = askmem(++argc + 2, line);
 		if (argv == NULL)
-		{
-			free(line), perror("Error: ");
 			return (-1);
-		}
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
@@ -57,4 +55,24 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 	} while (read);
 	free(line);
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * askmem - Allocates memory
+ * @argc: Amount of memory to allocate
+ * @line: The pointer to line readed
+ * Return: A pointer to the new memory area or NULL
+ */
+char **askmem(int argc, char *line)
+{
+char **argv;
+
+	argv = malloc((argc) * sizeof(char **));
+	if (argv == NULL)
+	{
+		free(line);
+		perror("Error: ");
+		return (NULL);
+	}
+	return (argv);
 }

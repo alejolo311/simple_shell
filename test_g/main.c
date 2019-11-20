@@ -11,7 +11,7 @@
 int main(int argc, char **argv, char **env)
 {
 unsigned int execnt = 1; /* Count how many executions */
-int read;
+int read = 0;
 	signal(SIGINT, handsigint);
 
 	if (argc > 1)

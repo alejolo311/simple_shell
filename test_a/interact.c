@@ -1,16 +1,18 @@
 #include "hsh.h"
 
+char **askmem(int argc, char *line);
+
 /**
  * interact - Exececutes a command
  * @av: Parameters for the program
  * @env: The variables from the environment
- *
+ * @execnt: the counter
  * Return: Always 0
  */
-int interact(char **av, char **env)
+int interact(char **av, char **env, unsigned int *execnt)
 {
 size_t len = 0;
-int read = 1, j, argc, inter = 1, builtin;
+int read = 1, j, argc, inter = 1, (*f)(), builtin;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
@@ -23,22 +25,13 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
-		builtin = check_builtin(line, env);
-		if (builtin == -19)
-			return(EXIT_SUCCESS);
-		else if (builtin)
-			continue;
 		tmp = strdup(line);
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
 				break;
-		argc++;
-		argv = malloc((argc + 2) * sizeof(char **));
+		argv = askmem(++argc + 2, line);
 		if (argv == NULL)
-		{
-			free(line), perror("Error: ");
 			return (-1);
-		}
 		argv[0] = av[0];
 		for (j = 1, str1 = line; ; j++, str1 = NULL)
 		{
@@ -46,10 +39,40 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			if (t == NULL)
 				break;
 		}
-		if (argc > 2)
-			myexec(j, argv, env);
-		free(argv), free(tmp);
+		f = check_builtin(line);
+		if (f != NULL)
+		{
+			builtin = f(argv, env, execnt);
+			if (strncmp(line, "exit", 4) == 0 && builtin >= 0)
+			{
+				free(argv), free(tmp), free(line);
+				return (builtin);
+			}
+		}
+		else
+			argc > 2 ? myexec(j, argv, env, execnt) : argc;
+		free(argv), free(tmp), (*execnt)++;
 	} while (read);
 	free(line);
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * askmem - Allocates memory
+ * @argc: Amount of memory to allocate
+ * @line: The pointer to line readed
+ * Return: A pointer to the new memory area or NULL
+ */
+char **askmem(int argc, char *line)
+{
+char **argv;
+
+	argv = malloc((argc) * sizeof(char **));
+	if (argv == NULL)
+	{
+		free(line);
+		perror("Error: ");
+		return (NULL);
+	}
+	return (argv);
 }

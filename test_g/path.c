@@ -16,8 +16,7 @@ static char **paths, *pa;
 
 	if (strncmp(name, "FLUSH", 5) == 0)
 	{
-		free(pa);
-		free(paths);
+		free(pa), free(paths);
 		return (NULL);
 	}
 	if (access(name, F_OK | R_OK | X_OK) == 0)
@@ -31,10 +30,8 @@ static char **paths, *pa;
 		for (k = 1, str1 = tmp; (token = strtok(str1, ":")); k++, str1 = NULL)
 			if (token == NULL)
 				break;
-		free(tmp);
-		pa = strdup(env[i]);
+		free(tmp), pa = strdup(env[i]);
 		paths = malloc(k * sizeof(char **));
-		/* for (j = 0, str1 = (*(env + i) + 5); ; j++, str1 = NULL) */
 		for (j = 0, str1 = (pa + 5); ; j++, str1 = NULL)
 		{
 			paths[j] = strtok(str1, ":");
