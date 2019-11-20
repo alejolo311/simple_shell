@@ -12,6 +12,7 @@ int interact(char **av, char **env, unsigned int *execnt)
 size_t len = 0;
 int read = 1, j, argc, inter = 1, builtin;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL;
+/* int (*f)(); */
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
@@ -23,11 +24,6 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
-		builtin = check_builtin(line, env);
-		if (builtin == -19)
-			return(EXIT_SUCCESS);
-		else if (builtin)
-			continue;
 		tmp = strdup(line);
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
@@ -46,6 +42,14 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			if (t == NULL)
 				break;
 		}
+		/* f = check_builtin(line), builtin = f(argv, env, execnt);
+		if (builtin == -19)
+		{
+			free(line);
+			return (EXIT_SUCCESS);
+		}
+		else if (builtin)
+			continue; */
 		if (argc > 2)
 			myexec(j, argv, env, execnt);
 		free(argv), free(tmp), (*execnt)++;
