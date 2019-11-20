@@ -9,8 +9,19 @@
  */
 int _ex(char **argv, char **env, unsigned int *execnt)
 {
-	(void) argv;
+	int ret;
+	char msg[80];
 	(void) env;
 	(void) execnt;
-	return (-19);
+
+	if (argv[2] == NULL)
+		return (0);
+	ret = atoi(argv[2]);
+	if ( ret < 0)
+	{
+		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *execnt, argv[1], ret);
+		write(STDERR_FILENO, &msg, strlen(msg));
+	}
+
+	return (ret);
 }

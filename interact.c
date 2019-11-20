@@ -45,15 +45,14 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		if (f != NULL)
 		{
 			builtin = f(argv, env, execnt);
-			if (builtin == -19)
+			if (strncmp(line, "exit", 4) == 0 && builtin >= 0)
 			{
-				free(line);
-				return (EXIT_SUCCESS);
+				free(argv), free(tmp), free(line);
+				return (builtin);
 			}
-			else if (builtin)
-				continue;
 		}
-		argc > 2 ? myexec(j, argv, env, execnt) : argc;
+		else
+			argc > 2 ? myexec(j, argv, env, execnt) : argc;
 		free(argv), free(tmp), (*execnt)++;
 	} while (read);
 	free(line);
