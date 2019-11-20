@@ -1,4 +1,4 @@
-#include "hsh.h" 
+#include "hsh.h"
 /**
  * _history - function history
  * desc: print the history of commands
@@ -8,10 +8,10 @@
  */
 int _history(char **argv, char **env, unsigned int *execnt)
 {
-     	(void) argv;
+	(void) argv;
 	(void) env;
 	(void) execnt;
 
-      	printf("history\n");
+	printf("history\n");
 	return (1);
 }

@@ -4,7 +4,7 @@
  * interact - Exececutes a command
  * @av: Parameters for the program
  * @env: The variables from the environment
- *
+ * @execnt: the counter
  * Return: Always 0
  */
 int interact(char **av, char **env, unsigned int *execnt)
@@ -42,9 +42,9 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 				break;
 		}
 		f = check_builtin(line);
-		if ( f != NULL)
+		if (f != NULL)
 		{
-		  	builtin = f(argv, env, execnt);
+			builtin = f(argv, env, execnt);
 			if (builtin == -19)
 			{
 				free(line);

@@ -1,15 +1,16 @@
-#include "hsh.h" 
+#include "hsh.h"
 /**
- * _exit - function enviroment
+ * _ex - function enviroment
  * desc: print the enviroment
  * @argv: the parameters
  * @env: the enviroment
+ * @execnt: the counter
  * Return: 1 in success.
  */
 int _ex(char **argv, char **env, unsigned int *execnt)
 {
-     	(void) argv;
+	(void) argv;
 	(void) env;
 	(void) execnt;
-     	return (-19);
+	return (-19);
 }

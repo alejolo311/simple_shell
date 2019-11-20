@@ -32,7 +32,7 @@ void handsigint(int sign);
 char *path(char *name, char **env);
 
 /* Function related with Built-ins */
-int (*check_builtin(char* line))();
+int (*check_builtin(char *line))();
 int _env(char **argv, char **env, unsigned int *execnt);
 int _ex(char **argv, char **env, unsigned int *execnt);
 int _cd(char **argv, char **env, unsigned int *execnt);
