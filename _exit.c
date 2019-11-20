@@ -9,7 +9,7 @@
  */
 int _ex(char **argv, char **env, unsigned int *execnt)
 {
-	int ret;
+	int ret = 0;
 	char msg[80];
 	(void) env;
 	(void) execnt;
