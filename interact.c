@@ -10,9 +10,8 @@
 int interact(char **av, char **env, unsigned int *execnt)
 {
 size_t len = 0;
-int read = 1, j, argc, inter = 1, builtin;
+int read = 1, j, argc, inter = 1, (*f)(), builtin;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL;
-/* int (*f)(); */
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
@@ -42,16 +41,19 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			if (t == NULL)
 				break;
 		}
-		/* f = check_builtin(line), builtin = f(argv, env, execnt);
-		if (builtin == -19)
+		f = check_builtin(line);
+		if ( f != NULL)
 		{
-			free(line);
-			return (EXIT_SUCCESS);
+		  	builtin = f(argv, env, execnt);
+			if (builtin == -19)
+			{
+				free(line);
+				return (EXIT_SUCCESS);
+			}
+			else if (builtin)
+				continue;
 		}
-		else if (builtin)
-			continue; */
-		if (argc > 2)
-			myexec(j, argv, env, execnt);
+		argc > 2 ? myexec(j, argv, env, execnt) : argc;
 		free(argv), free(tmp), (*execnt)++;
 	} while (read);
 	free(line);

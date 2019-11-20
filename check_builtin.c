@@ -9,26 +9,25 @@
 int (*check_builtin(char *builtin))()
 {
 	int i; /* the counter to itarate the struct to search the correct builtin" */
-	builtin_s cmm[] = {	
+	builtin_s built[] = {	
 		{"exit", _ex},
 		{"env", _env},	
-	/*	{"cd", _cd},
+		{"cd", _cd},
     		{"help", _help},
     		{"history", _history},
     		{"setenv", _setenv},
-    		{"unsetenv", _unsetenv}, */
-    		{"NULL", NULL}
+    		{"unsetenv", _unsetenv}
   	};
-	int cmm_len = sizeof(cmm) / sizeof(builtin_s);
+	int built_len = sizeof(built) / sizeof(builtin_s);
 	const char *p = builtin;
 
 	if (p != NULL)
 	  {
-	    for (i = 0; i < cmm_len; i++)
+	    for (i = 0; i < built_len; i++)
 	      {
-		if (strncmp(builtin, cmm[i].s, strlen(cmm[i].s)))
-		  	return (cmm[i].f);
+		if (strcmp(builtin, built[i].s) == 0)
+		  	return (built[i].f);
 	      }
 	  }
-	return (0);
+	return (NULL);
 }
