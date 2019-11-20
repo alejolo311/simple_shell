@@ -4,20 +4,20 @@
  * interact - Exececutes a command
  * @av: Parameters for the program
  * @env: The variables from the environment
- *
+ * @execnt: the counter
  * Return: Always 0
  */
 int interact(char **av, char **env, unsigned int *execnt)
 {
 size_t len = 0;
-int read = 1, j, argc, inter = 1;
+int read = 1, j, argc, inter = 1, (*f)(), builtin;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
 		inter == 1 ?  printf("#cisfun$ ") : inter;
 		read = getline(&line, &len, stdin);
-		if (strncmp(line, "exit", 4) == 0 || read == -1)
+		if (read == -1)
 		{
 			read == -1 && inter == 1 ? printf("\n") : read;
 			free(line);
@@ -41,8 +41,18 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			if (t == NULL)
 				break;
 		}
-		if (argc > 2)
-			myexec(j, argv, env, execnt);
+		f = check_builtin(line);
+		if (f != NULL)
+		{
+			builtin = f(argv, env, execnt);
+			if (strncmp(line, "exit", 4) == 0 && builtin >= 0)
+			{
+				free(argv), free(tmp), free(line);
+				return (builtin);
+			}
+		}
+		else
+			argc > 2 ? myexec(j, argv, env, execnt) : argc;
 		free(argv), free(tmp), (*execnt)++;
 	} while (read);
 	free(line);
