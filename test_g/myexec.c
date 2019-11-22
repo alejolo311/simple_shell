@@ -4,7 +4,7 @@
  * myexec - Exececutes a command
  * @argc: Quantity of parameters
  * @argv: The end NULL list of parameters
- * @env: The variables from the environment
+ * @lenv: The variables from the environment list
  * @execnt: the counter
  * Return: Always 0
  */
@@ -32,7 +32,7 @@ char **env = menv(lenv);
 			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
 			free(sentence);
-			path("FLUSH", lenv);
+			path("FLUSH", lenv), free(env);
 			exit(1);
 		}
 	}

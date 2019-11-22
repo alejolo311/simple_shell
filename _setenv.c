@@ -9,13 +9,14 @@
  */
 int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-	int i, asign = 0;;
+	int i, asign = 0;
 	char *variable, *value, *var;
-	lenv_s *h = *lenv;
+	lenv_s *h;
 	char *newvalue;
 	char buffer[120];
 
 	(void) execnt;
+	h = *lenv;
 	variable = argv[2];
 	value = argv[3];
 	if (variable && value)

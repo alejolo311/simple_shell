@@ -8,14 +8,18 @@
  */
 int currhist(commhist_s **h, commhist_s **t)
 {
-static commhist_s *head, *tail;
+static commhist_s *head = NULL, *tail = NULL;
 
-	if (*h == NULL)
+	if (h == NULL)
+		head = NULL;
+	else if (*h == NULL)
 		*h = head;
 	else
 		head = *h;
 
-	if (*t == NULL)
+	if (t == NULL)
+		tail = NULL;
+	else if (*t == NULL)
 		*t = tail;
 	else
 		tail = *t;

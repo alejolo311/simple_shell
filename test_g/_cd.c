@@ -9,7 +9,7 @@ void prnerr(char *prg, unsigned int *e, char *path);
  * desc: change between directories
  * @argv: the parameters
  * @e : the executions counter
- * @env: the enviroment
+ * @lenv: the enviroment list
  * Return: EXIT_SUCCESS in success.
  */
 int _cd(char **argv, lenv_s **lenv, unsigned int *e)

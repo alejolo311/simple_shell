@@ -8,7 +8,7 @@
 int addhist(char **argv)
 {
 int i = 1, len = 0;
-commhist_s *head = NULL, *tail = NULL, *node;
+commhist_s *head = NULL, *tail = NULL, *node = NULL;
 
 	currhist(&head, &tail);
 	node = malloc(sizeof(commhist_s));
@@ -20,7 +20,7 @@ commhist_s *head = NULL, *tail = NULL, *node;
 		if (i != 1)
 			len++;
 	}
-	node->cmd = malloc(len);
+	node->cmd = malloc(len + 1);
 	if (node->cmd == NULL)
 	{
 		free(node);

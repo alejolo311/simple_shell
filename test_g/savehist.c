@@ -7,10 +7,10 @@
  */
 int savehist(void)
 {
-int fd;         /* File Descriptor */
-int qty;
-char filename[120], *home;
-commhist_s *head = NULL, *tail = NULL, *node = NULL;
+int fd = -1;         /* File Descriptor */
+int qty = 0;
+char filename[120], *home = NULL, nl = '\n';
+commhist_s *head = NULL, *tail = NULL, *node = NULL, *deno = NULL;
 
 	currhist(&head, &tail);
 	if (head == NULL)
@@ -30,13 +30,16 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL;
 		qty = write(fd, node->cmd, strlen(node->cmd));
 		if (qty < 1)
 			return (-1);
-		qty = write(fd, "\n", 1);
+		qty = write(fd, &nl, 1);
 		if (qty < 1)
 			return (-1);
+		deno = node;
 		node = node->next;
+		free(deno->cmd), free(deno);
 	}
 	if (close(fd) == -1)
 		return (-1);
 
+	currhist(NULL, NULL);
 	return (EXIT_SUCCESS);
 }

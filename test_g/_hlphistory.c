@@ -7,7 +7,7 @@ int prn_hlphistory(void);
  * desc: print the help of the builtins
  * @av: the parameters
  * @e: the counter
- * @env: the enviroment
+ * @lenv: the enviroment list
  * Return: EXIT_SUCCESS in success.
  */
 int _hlphistory(char **av, lenv_s **lenv, unsigned int *e)

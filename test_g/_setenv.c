@@ -4,37 +4,44 @@
  * desc: set a enviroment variable
  * @argv: the parameters
  * @execnt: the counter
- * @env: the enviroment
+ * @lenv: the enviroment list
  * Return: 1 in success.
  */
 int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-	int i;
+	int i, asign = 0;
 	char *variable, *value, *var;
-	lenv_s *h = *lenv;
+	lenv_s *h;
 	char *newvalue;
+	char buffer[120];
 
 	(void) execnt;
-  	variable = argv[2];
-  	value = argv[3];
-  	if (variable && value)
-    	{
-     		for(i = 0; h; i++, h = h->next)
+	h = *lenv;
+	variable = argv[2];
+	value = argv[3];
+	if (variable && value)
+	{
+		for (i = 0; h; i++, h = h->next)
 		{
 			var = h->var;
 			if (strncmp(var, variable, strlen(variable)) == 0)
 			{
 				free(h->var);
-				newvalue = strdup("sebas");
+				sprintf(buffer, "%s=%s", variable, value);
+				newvalue = strdup(buffer);
 				h->var = newvalue;
+				asign = 1;
 				break;
 			}
 		}
+		if(asign == 0)
+		{
+			sprintf(buffer,"%s=%s", variable, value);	
+			add_node(lenv, buffer);
+		}
 	}
 	else
-		write(STDERR_FILENO,"Usage: setenv VARIABLE VALUE\n", 29);
+		write(STDERR_FILENO, "Usage: setenv VARIABLE VALUE\n", 29);
 
 	return (1);
-
 }
-
