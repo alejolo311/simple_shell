@@ -12,11 +12,11 @@ void prnerr(char *prg, unsigned int *e, char *path);
  * @env: the enviroment
  * Return: EXIT_SUCCESS in success.
  */
-int _cd(char **argv, char **env, unsigned int *e)
+int _cd(char **argv, lenv_s **lenv, unsigned int *e)
 {
 char ynprn = 0, *home = NULL, *pwd = NULL, *prev = NULL, *new = NULL;
 unsigned int size = 512;
-
+char **env = menv(lenv);
 	getverenv(&home, env, "HOME");			/* Get home from environment */
 	getverenv(&pwd, env, "OLDPWD");			/* Get oldpwd from environment */
 	if (askcwd(&prev, size) == -1)			/* Get previous path, if fail resize */
@@ -66,7 +66,7 @@ unsigned int size = 512;
 	setenv("PWD", new, 1);
 	if (ynprn)								/* Print the new path when necessary */
 		write(STDOUT_FILENO, new, strlen(new)), write(STDOUT_FILENO, "\n", 1);
-	free(home), free(pwd), free(prev), free(new);
+	free(home), free(pwd), free(prev), free(new), free(env);
 
 	return (EXIT_SUCCESS);
 }

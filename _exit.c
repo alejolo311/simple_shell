@@ -7,11 +7,11 @@
  * @e: the command execution counter
  * Return: 1 in success.
  */
-int _ex(char **argv, char **env, unsigned int *e)
+int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 {
 	int ret = 0;
 	char msg[80];
-	(void) env;
+	(void) lenv;
 
 	if (argv[2] == NULL)
 		return (0);

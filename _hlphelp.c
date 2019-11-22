@@ -10,11 +10,11 @@ int prn_hlphelp(void);
  * @e: the counter
  * Return: EXITSUCCESS in success.
  */
-int _hlphelp(char **av, char **env, unsigned int *e)
+int _hlphelp(char **av, lenv_s **lenv, unsigned int *e)
 {
 char msg[120];
 
-	(void) env;
+	(void) lenv;
 	(void) e;
 	if (strcmp(av[2], "-d") == 0)
 	{

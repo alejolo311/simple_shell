@@ -10,11 +10,11 @@ int prn_hlpexit(void);
  * @e: the counter
  * Return: EXIT_SUCCESS in success.
  */
-int _hlpexit(char **av, char **env, unsigned int *e)
+int _hlpexit(char **av, lenv_s **lenv, unsigned int *e)
 {
 char msg[120];
 
-	(void) env;
+	(void) lenv;
 	(void) e;
 	if (strcmp(av[2], "-d") == 0)
 	{

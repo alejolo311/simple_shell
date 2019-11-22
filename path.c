@@ -7,16 +7,16 @@
  *
  * Return: For succesful the full path other case NULL.
  */
-char *path(char *name, char **env)
+char *path(char *name, lenv_s **lenv)
 {
 unsigned int i;
 int j, k;
-char *str1, *token, *tmp;
+char *str1, *token, *tmp, **env = menv(lenv);
 static char **paths, *pa;
 
 	if (strncmp(name, "FLUSH", 5) == 0)
 	{
-		free(pa), free(paths);
+		free(pa), free(paths), free(env);
 		return (NULL);
 	}
 	if (access(name, F_OK | R_OK | X_OK) == 0)

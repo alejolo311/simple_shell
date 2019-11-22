@@ -10,11 +10,11 @@ int prn_hlpcd(void);
  * @e: the counter
  * Return: EXIT_SUCCESS in success.
  */
-int _hlpcd(char **av, char **env, unsigned int *e)
+int _hlpcd(char **av, lenv_s **lenv, unsigned int *e)
 {
 char msg[120];
 
-	(void) env;
+	(void) lenv;
 	(void) e;
 	if (strcmp(av[2], "-d") == 0)
 	{

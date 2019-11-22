@@ -7,31 +7,29 @@
  * @env: the enviroment
  * Return: 1 in success.
  */
-int _setenv(char **argv, char **env, unsigned int *execnt)
+int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-int i;
-unsigned int j;
-char *var, *value, *_value;
+	int i;
+	char *variable, *value, *var;
+	lenv_s *h = *lenv;
+	char *newvalue;
 
 	(void) execnt;
-  	var = argv[2];
+  	variable = argv[2];
   	value = argv[3];
-  	if (var && value)
+  	if (variable && value)
     	{
-     		for(i = 0; env[i] != NULL; i++)
+     		for(i = 0; h; i++, h = h->next)
 		{
-			if (strncmp(env[i], var, strlen(var)) == 0)
+			var = h->var;
+			if (strncmp(var, variable, strlen(variable)) == 0)
 			{
+				free(h->var);
+				newvalue = strdup("sebas");
+				h->var = newvalue;
 				break;
 			}
 		}
-		_value = env[i] + (strlen(var) + 1);
-
-		for (j = 0; j < strlen(value); j++)
-		{
-			_value[j] = value[j];
-		}
-		_value[j] = '\0';
 	}
 	else
 		write(STDERR_FILENO,"Usage: setenv VARIABLE VALUE\n", 29);

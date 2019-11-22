@@ -24,7 +24,6 @@ char filename[120], *home, buf, *av[3], line[256];
 			if (buf == '\n')
 			{
 				line[c] = '\0';
-				printf("[%s]::", line);
 				c = 0, av[0] = NULL;
 				av[1] = line, av[2] = NULL;
 				addhist(av);

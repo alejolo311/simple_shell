@@ -10,18 +10,23 @@
  */
 int main(int argc, char **argv, char **env)
 {
-unsigned int execnt = 1; /* Count how many executions */
-int read = 0;
+	unsigned int execnt = 1; /* Count how many executions */
+	int read = 0;
+	lenv_s *lenv;
 
+	lenv = cenv(env);
 	signal(SIGINT, handsigint);
 	loadhist();
 
 	if (argc > 1)
-		myexec(argc, argv, env, &execnt);
+		myexec(argc, argv, &lenv, &execnt);
 	else
-		read = interact(argv, env, &execnt);
+		read = interact(argv, &lenv, &execnt);
 
-	path("FLUSH", env);
+	path("FLUSH", &lenv);
+	printf("\nlibero el path\n");
+	free_list(&lenv);
+	printf("liberto la lista\n");
 	savehist();
 	return (read);
 }

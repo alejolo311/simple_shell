@@ -10,11 +10,11 @@ int prn_hlphistory(void);
  * @env: the enviroment
  * Return: EXIT_SUCCESS in success.
  */
-int _hlphistory(char **av, char **env, unsigned int *e)
+int _hlphistory(char **av, lenv_s **lenv, unsigned int *e)
 {
 char msg[120];
 
-	(void) env;
+	(void) lenv;
 	(void) e;
 	if (strcmp(av[2], "-d") == 0)
 	{
