@@ -6,7 +6,7 @@ int prn_help(char *command);
  * _help - function help
  * desc: print the help of the builtins
  * @av: the parameters
- * @env: the enviroment
+ * @lenv: the enviroment list
  * @e: the counter
  * Return: EXIT_SUCCESS in success.
  */

@@ -33,7 +33,7 @@ typedef struct commhist
  * struct lenv_s - singly linked list
  * @str: variable
  * @next: points to the next node
- *
+ * @var: enviroment variables.
  * Description: singly linked list node to store the env
  */
 typedef struct lenv_s
@@ -79,9 +79,10 @@ int _hlphistory(char **av, lenv_s **lenv, unsigned int *e);
 
 /* strings functions */
 
-size_t print_list(lenv_s **head);
+int _strlen(char *s);
 
 /* enviroment funcs */
+size_t print_list(lenv_s **head);
 int delete_node(lenv_s **head, unsigned int index);
 char **menv(lenv_s **head);
 lenv_s *add_node(lenv_s **head, char *str);

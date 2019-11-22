@@ -24,9 +24,7 @@ int main(int argc, char **argv, char **env)
 		read = interact(argv, &lenv, &execnt);
 
 	path("FLUSH", &lenv);
-	printf("\nlibero el path\n");
 	free_list(&lenv);
-	printf("liberto la lista\n");
 	savehist();
 	return (read);
 }

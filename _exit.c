@@ -3,7 +3,7 @@
  * _ex - function enviroment
  * desc: print the enviroment
  * @argv: the parameters
- * @env: the enviroment
+ * @lenv: the enviroment
  * @e: the command execution counter
  * Return: 1 in success.
  */
