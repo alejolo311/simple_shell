@@ -9,11 +9,11 @@
  */
 int _setenv(char **argv, char **env, unsigned int *execnt)
 {
+int i;
+unsigned int j;
+char *var, *value, *_value;
 
-	int i, j;
-	char *var, *value, *_value;
 	(void) execnt;
-
   	var = argv[2];
   	value = argv[3];
   	if (var && value)

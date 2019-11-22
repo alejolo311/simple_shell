@@ -25,7 +25,7 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL;
 	if (tail == NULL)
 		return (EXIT_SUCCESS);
 
-	line = tail->id / 4096;
+	line = tail->id % 4096;
 
 	node = head;
 	while (node != NULL)

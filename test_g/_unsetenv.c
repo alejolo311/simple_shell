@@ -9,11 +9,11 @@
  */
 int _unsetenv(char **argv, char **env, unsigned int *execnt)
 {
+int i;
+unsigned int j;
+char *var, *_var;
 
-	int i, j;
-	char *var, *_var;
 	(void) execnt;
-
   	var = argv[2];
   	if (var)
     	{
@@ -24,7 +24,7 @@ int _unsetenv(char **argv, char **env, unsigned int *execnt)
 				break;
 			}
 		}
-		//for(j = 0; j <= strlen(env[i]); j++)
+		for(j = 0; j <= strlen(env[i]); j++)
 			_var = env[i] + 0;
 			_var[0] = '\0';
 	}

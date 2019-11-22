@@ -9,11 +9,10 @@
  */
 int printvariable(char **argv, char **env, unsigned int *execnt)
 {
+int i;
+char *var, *_value;
 
-	int i, j;
-	char *var, *value, *_value;
 	(void) execnt;
-
   	var = argv[1] + 1;
   	if (var)
     	{

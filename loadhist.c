@@ -19,26 +19,24 @@ char filename[120], *home, buf, *av[3], line[256];
 
 	do {
 		qty = read(fd, &buf, 1);
-		if (qty <= -1)
-			return (0);
-		if (buf == '\n')
+		if (qty > 0)
 		{
-			if (c > 0)
+			if (buf == '\n')
 			{
 				line[c] = '\0';
 				printf("[%s]::", line);
-				c = 0;
-				av[0] = NULL;
-				av[1] = line;
-				av[2] = NULL;
+				c = 0, av[0] = NULL;
+				av[1] = line, av[2] = NULL;
 				addhist(av);
 			}
+			else
+			{
+				line[c] = buf;
+				c += qty;
+			}
 		}
-		else
-		{
-			line[c] = buf;
-			c += qty;
-		}
+		if (qty <= -1)
+			return (0);
 	} while (qty > 0);
 
 	if (close(fd) == -1)
