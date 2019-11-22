@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env)
 	loadhist();
 
 	if (argc > 1)
-		myexec(argc, argv, &lenv, &execnt);
+		inputfile(argc, argv, &lenv, &execnt);
 	else
 		read = interact(argv, &lenv, &execnt);
 
