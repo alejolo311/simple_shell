@@ -15,7 +15,11 @@ int (*check_builtin(char *builtin))()
 		{"help", _help},
 		{"history", _history},
 		{"setenv", _setenv},
-		{"unsetenv", _unsetenv}
+		{"unsetenv", _unsetenv},
+		{"hlphelp", _hlphelp},
+		{"hlpcd", _hlpcd},
+		{"hlpexit", _hlpexit},
+		{"hlphistory", _hlphistory}
 	};
 	int built_len = sizeof(built) / sizeof(builtin_s);
 	const char *p = builtin;
