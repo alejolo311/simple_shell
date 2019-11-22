@@ -65,6 +65,7 @@ int delete_node(lenv_s **head, unsigned int index)
 		return (-1);
 
 	next = actual->next->next;
+	free(actual->next->var);
 	free(actual->next);
 	actual->next = next;
 	return (1);

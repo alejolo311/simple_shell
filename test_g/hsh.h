@@ -61,6 +61,7 @@ int currhist(commhist_s **h, commhist_s **t);
 int addhist(char **argv);
 int savehist(void);
 int loadhist(void);
+int sizehist(void);
 
 /* Function related with Built-ins */
 int (*check_builtin(char *line))();
@@ -92,5 +93,9 @@ void free_list(lenv_s **head);
 
 /* input file */
 int inputfile(int argc, char **argv, lenv_s **lenv, unsigned int *execnt);
+
+/* variables */
+char **check_variable(char **argv, lenv_s **lenv);
+
 
 #endif /* H_SHELL */
