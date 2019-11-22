@@ -35,7 +35,7 @@ int (*f)(), builtin;
 				av[0], *e, (av[2][0] != '-') ? av[2] : av[3]);
 		sprintf(msg, "%s'help help' or 'man -k %s' or 'info %s'.\n", msg,
 				(av[2][0] != '-') ? av[2] : av[3], (av[2][0] != '-') ? av[2] : av[3]);
-		write(STDERR_FILENO, msg, strlen(msg));
+		write(STDERR_FILENO, msg, _strlen(msg));
 		return (-1);
 		}
 	}
@@ -45,7 +45,7 @@ int (*f)(), builtin;
 				av[0], *e, (av[2][0] != '-') ? av[2] : av[3]);
 		sprintf(msg, "%s'help help' or 'man -k %s' or 'info %s'.\n", msg,
 				(av[2][0] != '-') ? av[2] : av[3], (av[2][0] != '-') ? av[2] : av[3]);
-		write(STDERR_FILENO, msg, strlen(msg));
+		write(STDERR_FILENO, msg, _strlen(msg));
 		return (-1);
 	}
 
@@ -81,7 +81,7 @@ NULL
 
 	if (command == NULL)
 		for (i = 0; msg[i] != NULL; i++)
-			write(STDOUT_FILENO, msg[i], strlen(msg[i]));
+			write(STDOUT_FILENO, msg[i], _strlen(msg[i]));
 
 	return (EXIT_SUCCESS);
 }

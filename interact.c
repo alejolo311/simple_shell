@@ -17,7 +17,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
-		inter == 1 ?  printf("#cisfun$ ") : inter;
+		inter == 1 ?  printf("($) ") : inter;
 		fflush(stdin);
 		read = getline(&line, &len, stdin);
 		if (read == -1)
@@ -26,8 +26,8 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
-		myline = strdup(line);
-		tmp = strdup(myline);
+		myline = _strdup(line);
+		tmp = _strdup(myline);
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
 				break;
@@ -55,11 +55,6 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		else
 			argc > 2 ? ret = myexec(j, argv, lenv, execnt) : argc;
 		addhist(argv), free(argv), free(tmp), free(myline), (*execnt)++;
-		/*if (ret == 127)
-		{
-			free(line);
-			return (127);
-		}*/
 	} while (1);
 	free(myline), free(line);
 	return (EXIT_SUCCESS);
@@ -68,7 +63,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 /**
  * askmem - Allocates memory
  * @argc: Amount of memory to allocate
- * @line: The pointer to line readed
+ * @myline: The pointer to line readed
  * Return: A pointer to the new memory area or NULL
  */
 char **askmem(int argc, char *myline)

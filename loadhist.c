@@ -19,25 +19,12 @@ char filename[120], *home, buf, *av[3], line[256];
 
 	do {
 		qty = read(fd, &buf, 1);
-		if (qty <= -1)
-			return (0);
-		if (qty > 0)
-			if (buf == '\n')
-				c++;
-	} while (qty > 0);
-
-
-	buf = c = 0;
-	lseek(fd, 0, SEEK_SET);
-
-	do {
-		qty = read(fd, &buf, 1);
 		if (qty > 0)
 		{
 			if (buf == '\n')
 			{
 				line[c] = '\0';
-				c = 0, av[0] = NULL;
+				c = 0, av[0] = line;
 				av[1] = line, av[2] = NULL;
 				addhist(av);
 			}

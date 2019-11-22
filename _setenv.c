@@ -28,15 +28,15 @@ int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 			{
 				free(h->var);
 				sprintf(buffer, "%s=%s", variable, value);
-				newvalue = strdup(buffer);
+				newvalue = _strdup(buffer);
 				h->var = newvalue;
 				asign = 1;
 				break;
 			}
 		}
-		if(asign == 0)
+		if (asign == 0)
 		{
-			sprintf(buffer,"%s=%s", variable, value);	
+			sprintf(buffer, "%s=%s", variable, value);
 			add_node(lenv, buffer);
 		}
 	}

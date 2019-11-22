@@ -3,8 +3,7 @@
  * check_variable - check if the input is a variable
  * desc: set a enviroment variable
  * @argv: the parameters
- * @execnt: the counter
- * @env: the enviroment
+ * @lenv: the enviroment
  * Return: 1 in success.
  */
 char **check_variable(char **argv, lenv_s **lenv)
@@ -18,10 +17,10 @@ char **check_variable(char **argv, lenv_s **lenv)
 
 		if (argv[i][0] == '$' && argv[i][1] == '$')
 		{
-			printf("%d\n", getpid()); 
+			printf("%d\n", getpid());
 			break;
 		}
-	
+
 	}
 
 	return (argv);

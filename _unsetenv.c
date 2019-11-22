@@ -15,7 +15,7 @@ int _unsetenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 
 	(void)execnt;
 	h = *lenv;
-	if(argv[2] && argv[3] == NULL)
+	if (argv[2] && argv[3] == NULL)
 	{
 		for (i = 0; h; i++)
 		{

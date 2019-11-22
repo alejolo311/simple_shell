@@ -80,6 +80,7 @@ int _hlphistory(char **av, lenv_s **lenv, unsigned int *e);
 /* strings functions */
 
 int _strlen(char *s);
+char *_strdup(char *str);
 
 /* enviroment funcs */
 size_t print_list(lenv_s **head);

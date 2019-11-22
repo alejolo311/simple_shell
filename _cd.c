@@ -65,7 +65,7 @@ char **env = menv(lenv);
 	setenv("OLDPWD", prev, 1);				/* Set the new path in environment */
 	setenv("PWD", new, 1);
 	if (ynprn)								/* Print the new path when necessary */
-		write(STDOUT_FILENO, new, strlen(new)), write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, new, _strlen(new)), write(STDOUT_FILENO, "\n", 1);
 	free(home), free(pwd), free(prev), free(new), free(env);
 
 	return (EXIT_SUCCESS);
@@ -82,9 +82,9 @@ void getverenv(char **home, char **env, char *var)
 {
 	while (*env != NULL)
 	{
-		if (strncmp(*env, var, strlen(var)) == 0)
+		if (strncmp(*env, var, _strlen(var)) == 0)
 		{
-			*home = strdup((*env) + strlen(var) + 1);
+			*home = _strdup((*env) + _strlen(var) + 1);
 			break;
 		}
 		env++;
@@ -127,5 +127,5 @@ void prnerr(char *prg, unsigned int *e, char *path)
 char msg[80];
 
 	sprintf(msg, "%s: %d: cd: can't cd to %s\n", prg, *e, path);
-	write(STDERR_FILENO, msg, strlen(msg));
+	write(STDERR_FILENO, msg, _strlen(msg));
 }

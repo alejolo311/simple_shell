@@ -10,6 +10,7 @@ lenv_s *cenv(char **env)
 {
 	int i;
 	lenv_s *lenv;
+
 	lenv = NULL;
 	for (i = 1; env[i] != NULL; i++)
 	{
@@ -39,7 +40,7 @@ lenv_s *add_node(lenv_s **head, char *str)
 	node = malloc(sizeof(lenv_s));
 	if (node == NULL)
 		return (NULL);
-	_str = strdup(str);
+	_str = _strdup(str);
 	if (_str == NULL)
 	{
 		free(node);

@@ -10,7 +10,7 @@ int addhist(char **argv)
 	int i = 1, len = 0;
 	commhist_s *head = NULL, *tail = NULL, *node = NULL;
 
-	if(argv[0] == NULL || argv == NULL || argv[1] == NULL)
+	if (argv[0] == NULL || argv == NULL || argv[1] == NULL)
 		return (-1);
 	currhist(&head, &tail);
 	node = malloc(sizeof(commhist_s));
@@ -18,7 +18,7 @@ int addhist(char **argv)
 		return (-1);
 	for (i = 1; argv[i] != NULL; i++)
 	{
-		len += strlen(argv[i]);
+		len += _strlen(argv[i]);
 		if (i != 1)
 			len++;
 	}
@@ -28,7 +28,7 @@ int addhist(char **argv)
 		free(node);
 		return (-1);
 	}
-	
+
 	node->cmd[0] = '\0';
 	for (i = 1; argv[i] != NULL; i++)
 	{
@@ -44,7 +44,6 @@ int addhist(char **argv)
 		currhist(&head, &tail);
 		return (EXIT_SUCCESS);
 	}
-
 	node->id = tail->id + 1, tail->next = node, tail = node;
 	currhist(&head, &tail);
 	return (EXIT_SUCCESS);
