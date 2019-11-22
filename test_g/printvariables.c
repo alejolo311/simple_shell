@@ -7,16 +7,15 @@
  * @env: the enviroment
  * Return: 1 in success.
  */
-int _setenv(char **argv, char **env, unsigned int *execnt)
+int printvariable(char **argv, char **env, unsigned int *execnt)
 {
 
 	int i, j;
 	char *var, *value, *_value;
 	(void) execnt;
 
-  	var = argv[2];
-  	value = argv[3];
-  	if (var && value)
+  	var = argv[1] + 1;
+  	if (var)
     	{
      		for(i = 0; env[i] != NULL; i++)
 		{
@@ -26,15 +25,10 @@ int _setenv(char **argv, char **env, unsigned int *execnt)
 			}
 		}
 		_value = env[i] + (strlen(var) + 1);
-
-		for (j = 0; j < strlen(value); j++)
-		{
-			_value[j] = value[j];
-		}
-		_value[j] = '\0';
+		printf("%s", _value);
 	}
 	else
-		write(STDERR_FILENO,"Usage: setenv VARIABLE VALUE\n", 29);
+		write(STDERR_FILENO,"Usage:$VARIABLE\n", 15);
 
 	return (1);
 
