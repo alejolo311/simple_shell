@@ -12,7 +12,9 @@ int main(int argc, char **argv, char **env)
 {
 unsigned int execnt = 1; /* Count how many executions */
 int read = 0;
+
 	signal(SIGINT, handsigint);
+	loadhist();
 
 	if (argc > 1)
 		myexec(argc, argv, env, &execnt);
@@ -20,5 +22,6 @@ int read = 0;
 		read = interact(argv, env, &execnt);
 
 	path("FLUSH", env);
+	savehist();
 	return (read);
 }

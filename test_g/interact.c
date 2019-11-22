@@ -51,7 +51,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		}
 		else
 			argc > 2 ? myexec(j, argv, env, execnt) : argc;
-		free(argv), free(tmp), (*execnt)++;
+		free(argv), free(tmp), (*execnt)++, addhist(argv);
 	} while (read);
 	free(line);
 	return (EXIT_SUCCESS);
