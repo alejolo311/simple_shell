@@ -4,7 +4,7 @@
 .Os Ubuntu_Linux 14.04
 .Sh NAME
 .Nm hsh
-.Nd command interpreter (shell)
+.Nd command interpreter (simple shell)
 .\" This next command is for sections 2 and 3 only.
 .\" .Sh LIBRARY
 .Sh SYNOPSIS
