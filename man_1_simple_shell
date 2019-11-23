@@ -1,7 +1,7 @@
 .\" The following commands are required for all man pages.
 .Dd December 28, 2019
 .Dt HSH 1 SMM
-.Os Ubuntu Linux 14.04
+.Os Ubuntu_Linux 14.04
 .Sh NAME
 .Nm hsh
 .Nd command interpreter (shell)
