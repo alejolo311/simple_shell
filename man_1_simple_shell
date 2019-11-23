@@ -1,10 +1,10 @@
 .\" The following commands are required for all man pages.
-.Dd Month day, year
-.Dt DOCUMENT_TITLE [section number] [architecture/volume]
-.Os [OPERATING_SYSTEM] [version/release]
+.Dd December 28, 2019
+.Dt HSH 1 SMM
+.Os Ubuntu Linux 14.04
 .Sh NAME
-.Nm name
-.Nd one line description of name
+.Nm hsh
+.Nd command interpreter (shell)
 .\" This next command is for sections 2 and 3 only.
 .\" .Sh LIBRARY
 .Sh SYNOPSIS
