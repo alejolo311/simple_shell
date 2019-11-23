@@ -8,6 +8,8 @@
 .\" This next command is for sections 2 and 3 only.
 .\" .Sh LIBRARY
 .Sh SYNOPSIS
+.Nm hsh
+.Op file_name
 .Sh DESCRIPTION
 .\" The following commands should be uncommented and
 .\" used where appropriate.
