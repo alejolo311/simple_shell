@@ -1,12 +1,19 @@
 #include "hsh.h"
+/**
+ * cenv - this function creat a list from env
+ * @env: the enviroment
+ * Description: this funtion create a list from env
+ * section header: the header of this function is hsh.h
+ * Return: return the list.
+ **/
 lenv_s *cenv(char **env)
 {
 	int i;
 	lenv_s *lenv;
-	char *value;
+
 	lenv = NULL;
 	for (i = 1; env[i] != NULL; i++)
-	{	
+	{
 		add_node(&lenv, env[i]);
 	}
 	return (lenv);
@@ -18,7 +25,7 @@ lenv_s *cenv(char **env)
  * @head: the head of list
  * @str: the string to put in the new node
  * Description: add a new node to a list
- * section header: the header of this function is lists.h)
+ * section header: the header of this function is hsh.h
  * Return: the head of the list.
  */
 lenv_s *add_node(lenv_s **head, char *str)
@@ -56,6 +63,13 @@ lenv_s *add_node(lenv_s **head, char *str)
 	return (tail);
 
 }
+/**
+ * print_list - this function prints a list
+ * @head: the head of list
+ * Description: this function prints a list
+ * section header: the header of this function is hsh.h
+ * Return: the number of nodes
+ **/
 size_t print_list(lenv_s **head)
 {
 	int i;
@@ -73,7 +87,13 @@ size_t print_list(lenv_s **head)
 
 	return (i);
 }
-
+/**
+ * menv - this function convert a list to a doble pointer
+ * @head: the head of list
+ * Description: this converta list to a doble pointer.
+ * section header: the header of this function is hsh.h
+ * Return: the doble pointer.
+ **/
 char **menv(lenv_s **head)
 {
 	int i;
@@ -93,20 +113,17 @@ char **menv(lenv_s **head)
 
 /**
  * free_list - free a list
-(* a blank line
-*@head: the head of list
-* Description: this function free a list.)?
-(* section header: the header of this function is lists.h)*
-* Return: void, no return
-*/
+ * @head: the head of list
+ * Description: this function free a list.)?
+ * section header: the header of this function is lists.h)*
+ * Return: void, no return
+ **/
 void free_list(lenv_s **head)
 {
-	printf("empezo a liberar\n");
 	lenv_s *h = *head;
 	lenv_s *position, *next;
 
 	position = h;
-	printf("segun arturo esto no sale\n");
 	while (position != '\0')
 	{
 		next = position->next;
@@ -114,6 +131,5 @@ void free_list(lenv_s **head)
 		free(position);
 		position = next;
 	}
-	printf("despues del while\n");
 	h = '\0';
 }

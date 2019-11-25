@@ -4,7 +4,7 @@
  * _history - function history
  * desc: print the history of commands
  * @argv: the parameters
- * @env: the enviroment
+ * @lenv: the enviroment list
  * @execnt: the comands counter
  * Return: EXIT_SUCCESS in success.
  */

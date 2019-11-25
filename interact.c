@@ -5,7 +5,7 @@ char **askmem(int argc, char *line);
 /**
  * interact - Exececutes a command
  * @av: Parameters for the program
- * @env: The variables from the environment
+ * @lenv: The variables from the environment list
  * @execnt: the counter
  * Return: Always 0
  */
@@ -21,7 +21,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
-			read == -1 && inter == 1 ? write(1,"\n",1) : read;
+			read == -1 && inter == 1 ? write(1, "\n", 1) : read;
 			free(line);
 			return (EXIT_SUCCESS);
 		}

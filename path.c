@@ -3,8 +3,7 @@
 /**
  * path - Evaluate the name for execution taking into account PATH if necessary
  * @name: Name of the command to execute
- * @env: The environment
- *
+ * @lenv: The environment list
  * Return: For succesful the full path other case NULL.
  */
 char *path(char *name, lenv_s **lenv)

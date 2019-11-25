@@ -1,17 +1,18 @@
 #include "hsh.h"
 /**
- * _setenv - function setenv
+ * alias - function setenv
  * desc: set a enviroment variable
  * @argv: the parameters
  * @execnt: the counter
- * @env: the enviroment
+ * @lenv: the enviroment list
  * Return: 1 in success.
  */
-int alias(char **argv, char **env, unsigned int *execnt)
+int alias(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
 	(void) argv;
-	(void) env;
+	(void) lenv;
 	(void) execnt;
 	printf("alias\n");
+	return (1);
 }
 

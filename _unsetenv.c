@@ -4,23 +4,24 @@
  * desc: set a enviroment variable
  * @argv: the parameters
  * @execnt: the counter
- * @env: the enviroment
+ * @lenv: the enviroment
  * Return: 1 in success.
  */
 int _unsetenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
 	unsigned int i;
-	(void)execnt;
 	lenv_s *h = *lenv;
 	char *var;
-	if(argv[2] && argv[3] == NULL)
+
+	(void) execnt;
+	if (argv[2] && argv[3] == NULL)
 	{
-		for(i = 0; h; i++)
+		for (i = 0; h; i++)
 		{
 			var = h->var;
-			if(strncmp(var, argv[2], strlen(argv[2])) == 0)
+			if (strncmp(var, argv[2], strlen(argv[2])) == 0)
 			{
-		       		delete_node(lenv, i);
+				delete_node(lenv, i);
 				break;
 			}
 			else
@@ -32,17 +33,18 @@ int _unsetenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 	return (1);
 }
 /**
-   * delete_nodeint_at_index - thsi function delete a node
-    * @head: the head of list
-     * @index: the index to put the delete node
-      * Description: this function delete a node
-       * section header: the header of this function is lists.h)*
-        * Return: 1 in success -1 in failure
-	 */
+ * delete_node - thsi function delete a node
+ * @head: the head of list
+ * @index: the index to put the delete node
+ * Description: this function delete a node
+ * section header: the header of this function is hsh.h
+ * Return: 1 in success -1 in failure
+ **/
 int delete_node(lenv_s **head, unsigned int index)
 {
 	lenv_s *actual, *next;
 	unsigned int i;
+
 	if (head == NULL || *head == NULL)
 		return (-1);
 

@@ -4,7 +4,7 @@
  * myexec - Exececutes a command
  * @argc: Quantity of parameters
  * @argv: The end NULL list of parameters
- * @env: The variables from the environment
+ * @lenv: The variables from the environment list
  * @execnt: the counter
  * Return: Always 0
  */
