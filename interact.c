@@ -21,7 +21,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
-			read == -1 && inter == 1 ? printf("\n") : read;
+			read == -1 && inter == 1 ? write(1,"\n",1) : read;
 			free(line);
 			return (EXIT_SUCCESS);
 		}

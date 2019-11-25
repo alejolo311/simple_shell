@@ -30,6 +30,19 @@ typedef struct commhist
 } commhist_s;
 
 /**
+ * struct lenv_s - singly linked list
+ * @str: variable
+ * @next: points to the next node
+ *
+ * Description: singly linked list node to store the env
+ */
+typedef struct lenv_s
+{
+	char *var;
+	struct lenv_s *next;
+} lenv_s;
+
+/**
  * struct builtin - Structure for builtins
  * @s: String to compare
  * @f: Function to execute
@@ -62,4 +75,12 @@ int _hlphelp(char **av, char **env, unsigned int *e);
 int _hlpcd(char **av, char **env, unsigned int *e);
 int _hlpexit(char **av, char **env, unsigned int *e);
 int _hlphistory(char **av, char **env, unsigned int *e);
+
+
+/* strings functions */
+
+size_t print_list(lenv_s **head);
+lenv_s *add_node(lenv_s **head, char *str);
+lenv_s *cenv(char **env);
+
 #endif /* H_SHELL */

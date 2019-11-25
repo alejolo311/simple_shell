@@ -10,9 +10,11 @@
  */
 int main(int argc, char **argv, char **env)
 {
-unsigned int execnt = 1; /* Count how many executions */
-int read = 0;
+	unsigned int execnt = 1; /* Count how many executions */
+	int read = 0;
+	lenv_s *lenv;
 
+	lenv = cenv(env);
 	signal(SIGINT, handsigint);
 	loadhist();
 
