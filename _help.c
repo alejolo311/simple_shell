@@ -10,12 +10,11 @@ int prn_help(char *command);
  * @e: the counter
  * Return: EXIT_SUCCESS in success.
  */
-int _help(char **av, char **env, unsigned int *e)
+int _help(char **av, lenv_s **lenv, unsigned int *e)
 {
 char msg[120];
 int (*f)(), builtin;
 
-	(void) env;
 	if (av[2] == NULL)		/* When "help" */
 	{
 		prn_help(NULL);
@@ -29,7 +28,7 @@ int (*f)(), builtin;
 	f = check_builtin(msg);
 	if (f != NULL)		/* If there is function */
 	{
-		builtin = f(av, env, e);
+		builtin = f(av, lenv, e);
 		if (builtin != EXIT_SUCCESS)
 		{
 		sprintf(msg, "%s: %d: help: no help topics match '%s'. Try ",

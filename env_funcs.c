@@ -3,10 +3,12 @@ lenv_s *cenv(char **env)
 {
 	int i;
 	lenv_s *lenv;
-
+	char *value;
 	lenv = NULL;
 	for (i = 1; env[i] != NULL; i++)
+	{	
 		add_node(&lenv, env[i]);
+	}
 	return (lenv);
 
 }
@@ -89,5 +91,29 @@ char **menv(lenv_s **head)
 	return (lenv);
 }
 
+/**
+ * free_list - free a list
+(* a blank line
+*@head: the head of list
+* Description: this function free a list.)?
+(* section header: the header of this function is lists.h)*
+* Return: void, no return
+*/
+void free_list(lenv_s **head)
+{
+	printf("empezo a liberar\n");
+	lenv_s *h = *head;
+	lenv_s *position, *next;
 
-
+	position = h;
+	printf("segun arturo esto no sale\n");
+	while (position != '\0')
+	{
+		next = position->next;
+		free(position->var);
+		free(position);
+		position = next;
+	}
+	printf("despues del while\n");
+	h = '\0';
+}

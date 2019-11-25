@@ -8,15 +8,16 @@
  * @execnt: the counter
  * Return: Always 0
  */
-int myexec(int argc, char **argv, char **env, unsigned int *execnt)
+int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 {
 pid_t pid;
 int status, ret;
 char msg[80], *sentence;
+char **env = menv(lenv);
 
 	(void) argc;
 
-	sentence = path(argv[1], env);
+	sentence = path(argv[1], lenv);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -31,13 +32,13 @@ char msg[80], *sentence;
 			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
 			free(sentence);
-			path("FLUSH", env);
+			path("FLUSH", lenv);
 			exit(1);
 		}
 	}
 	else
 		wait(&status);
 
-	free(sentence);
+	free(sentence), free(env);
 	return (EXIT_SUCCESS);
 }

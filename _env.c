@@ -7,15 +7,12 @@
  * @execnt: the counter
  * Return: 1 in success.
  */
-int _env(char **argv, char **env, unsigned int *execnt)
+int _env(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
 	unsigned int i;
 
 	(void) argv;
-	(void) env;
 	(void) execnt;
 
-	for (i = 0; env[i] != NULL; i++)
-		printf("%s\n", env[i]);
-	return (1);
+	print_list(lenv);
 }

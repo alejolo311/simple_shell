@@ -9,7 +9,7 @@ char **askmem(int argc, char *line);
  * @execnt: the counter
  * Return: Always 0
  */
-int interact(char **av, char **env, unsigned int *execnt)
+int interact(char **av, lenv_s **lenv, unsigned int *execnt)
 {
 size_t len = 0;
 int read = 1, j, argc, inter = 1, (*f)(), builtin;
@@ -42,7 +42,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 		f = check_builtin(line);
 		if (f != NULL)
 		{
-			builtin = f(argv, env, execnt);
+			builtin = f(argv, lenv, execnt);
 			if (strncmp(line, "exit", 4) == 0 && builtin >= 0)
 			{
 				free(argv), free(tmp), free(line);
@@ -50,7 +50,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL;
 			}
 		}
 		else
-			argc > 2 ? myexec(j, argv, env, execnt) : argc;
+			argc > 2 ? myexec(j, argv, lenv, execnt) : argc;
 		free(argv), free(tmp), (*execnt)++, addhist(argv);
 	} while (read);
 	free(line);

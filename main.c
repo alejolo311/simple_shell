@@ -19,11 +19,14 @@ int main(int argc, char **argv, char **env)
 	loadhist();
 
 	if (argc > 1)
-		myexec(argc, argv, env, &execnt);
+		myexec(argc, argv, &lenv, &execnt);
 	else
-		read = interact(argv, env, &execnt);
+		read = interact(argv, &lenv, &execnt);
 
-	path("FLUSH", env);
+	path("FLUSH", &lenv);
+	printf("\nlibero el path\n");
+	free_list(&lenv);
+	printf("liberto la lista\n");
 	savehist();
 	return (read);
 }

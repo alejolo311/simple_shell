@@ -8,14 +8,14 @@
  * @execnt: the comands counter
  * Return: EXIT_SUCCESS in success.
  */
-int _history(char **argv, char **env, unsigned int *execnt)
+int _history(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
 char msg[120];
 int line;
 commhist_s *head = NULL, *tail = NULL, *node = NULL;
 
 	(void) argv;
-	(void) env;
+	(void) lenv;
 	(void) execnt;
 
 	currhist(&head, &tail);
