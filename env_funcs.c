@@ -57,3 +57,23 @@ size_t print_list(lenv_s **head)
 
 	return (i);
 }
+
+char **menv(lenv_s **head)
+{
+	int i;
+	lenv_s *h = *head;
+	char **lenv;
+
+	for (i = 0; h; i++)
+		h = h->next;
+	lenv = malloc(sizeof(char *) * (i + 1));
+	h = *head;
+	for (i = 0; h; i++)
+		lenv[i] = h->var;
+	lenv[i] = NULL;
+
+	return (lenv);
+}
+
+
+
