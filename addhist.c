@@ -16,7 +16,7 @@ commhist_s *head = NULL, *tail = NULL, *node;
 		return (-1);
 	for (i = 1; argv[i] != NULL; i++)
 	{
-		len += strlen(argv[i]);
+		len += _strlen(argv[i]);
 		if (i != 1)
 			len++;
 	}
