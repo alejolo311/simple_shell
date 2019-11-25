@@ -21,8 +21,10 @@ lenv_s *cenv(char **env)
  */
 lenv_s *add_node(lenv_s **head, char *str)
 {
-	lenv_s *node;
+	lenv_s *node, *tail;
 	char *_str;
+
+	tail = *head;
 
 	if (str == NULL)
 		return (NULL);
@@ -36,15 +38,27 @@ lenv_s *add_node(lenv_s **head, char *str)
 		return (NULL);
 	}
 	node->var = _str;
-	node->next = *head;
-	*head = node;
-	return (*head);
+	node->next = '\0';
+
+	if (*head == '\0')
+	{
+		*head = node;
+		return (node);
+	}
+
+	while (tail->next)
+		tail = tail->next;
+
+	tail->next = node;
+
+	return (tail);
+
 }
 size_t print_list(lenv_s **head)
 {
 	int i;
 
-	lenv_s *h = *head;	
+	lenv_s *h = *head;
 
 	for (i = 0; h ; i++)
 	{
@@ -68,7 +82,7 @@ char **menv(lenv_s **head)
 		h = h->next;
 	lenv = malloc(sizeof(char *) * (i + 1));
 	h = *head;
-	for (i = 0; h; i++)
+	for (i = 0; h; i++, h = h->next)
 		lenv[i] = h->var;
 	lenv[i] = NULL;
 
