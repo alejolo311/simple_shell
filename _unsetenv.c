@@ -7,31 +7,65 @@
  * @env: the enviroment
  * Return: 1 in success.
  */
-int _unsetenv(char **argv, char **env, unsigned int *execnt)
+int _unsetenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-
-	int i, j;
-	char *var, *_var;
-	(void) execnt;
-
-  	var = argv[2];
-  	if (var)
-    	{
-     		for(i = 0; env[i] != NULL; i++)
+	unsigned int i;
+	(void)execnt;
+	lenv_s *h = *lenv;
+	char *var;
+	if(argv[2] && argv[3] == NULL)
+	{
+		for(i = 0; h; i++)
 		{
-			if (strncmp(env[i], var, strlen(var)) == 0)
+			var = h->var;
+			if(strncmp(var, argv[2], strlen(argv[2])) == 0)
 			{
+		       		delete_node(lenv, i);
 				break;
 			}
+			else
+			{
+				h = h->next;
+			}
 		}
-		//for(j = 0; j <= strlen(env[i]); j++)
-			_var = env[i] + 0;
-			_var[0] = '\0';
 	}
-	else
-		write(STDERR_FILENO,"Usage: unsetenv VARIABLE VALUE\n", 31);
-
 	return (1);
-
 }
+/**
+   * delete_nodeint_at_index - thsi function delete a node
+    * @head: the head of list
+     * @index: the index to put the delete node
+      * Description: this function delete a node
+       * section header: the header of this function is lists.h)*
+        * Return: 1 in success -1 in failure
+	 */
+int delete_node(lenv_s **head, unsigned int index)
+{
+	lenv_s *actual, *next;
+	unsigned int i;
+	if (head == NULL || *head == NULL)
+		return (-1);
+
+	actual = *head;
+
+	if (index == '\0')
+	{
+		*head = actual->next;
+		free(actual);
+		return (1);
+	}
+
+	for (i = 0; actual && i < index - 1; i++)
+		actual = actual->next;
+
+	if (actual == NULL || actual->next == NULL)
+		return (-1);
+
+	next = actual->next->next;
+	free(actual->next);
+	actual->next = next;
+	return (1);
+}
+
+
 
