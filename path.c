@@ -44,7 +44,7 @@ static char **paths, *pa;
 		sprintf(tmp, "%s/%s", paths[k], name);
 		if (access(tmp, F_OK | R_OK | X_OK) == 0)
 			return (tmp);
-		free(tmp);
+		free(tmp), free(env);
 	}
 
 	return (NULL);

@@ -32,7 +32,8 @@ char **env = menv(lenv);
 			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
 			free(sentence);
-			path("FLUSH", lenv);
+			path("FLUSH", lenv), free(env);
+		       	free_list(lenv);
 			exit(1);
 		}
 	}
