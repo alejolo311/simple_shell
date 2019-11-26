@@ -9,10 +9,11 @@
  */
 int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-	int i;
+	int i, asign = 0;;
 	char *variable, *value, *var;
 	lenv_s *h = *lenv;
 	char *newvalue;
+	char buffer[120];
 
 	(void) execnt;
 	variable = argv[2];
@@ -25,10 +26,17 @@ int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 			if (strncmp(var, variable, strlen(variable)) == 0)
 			{
 				free(h->var);
-				newvalue = strdup("sebas");
+				sprintf(buffer, "%s=%s", variable, value);
+				newvalue = strdup(buffer);
 				h->var = newvalue;
+				asign = 1;
 				break;
 			}
+		}
+		if(asign == 0)
+		{
+			sprintf(buffer,"%s=%s", variable, value);	
+			add_node(lenv, buffer);
 		}
 	}
 	else

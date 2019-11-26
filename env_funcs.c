@@ -122,7 +122,7 @@ void free_list(lenv_s **head)
 	lenv_s *h;
 	lenv_s *position, *next;
 
-	printf("empezo a liberar\n");
+
 	h = *head;
 	position = h;
 	while (position != '\0')
