@@ -48,7 +48,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 		if ( WIFEXITED(status))
 		{
 			es = WEXITSTATUS(status);
-			printf("return of the child: %d\n", es);
+			(void) es;
 		}
 	}
 	free(sentence), free(env);
