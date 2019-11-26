@@ -7,9 +7,11 @@
  */
 int addhist(char **argv)
 {
-int i = 1, len = 0;
-commhist_s *head = NULL, *tail = NULL, *node = NULL;
+	int i = 1, len = 0;
+	commhist_s *head = NULL, *tail = NULL, *node = NULL;
 
+	if(argv[0] == NULL || argv == NULL || argv[1] == NULL)
+		return (-1);
 	currhist(&head, &tail);
 	node = malloc(sizeof(commhist_s));
 	if (node == NULL)
@@ -26,6 +28,7 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL;
 		free(node);
 		return (-1);
 	}
+	
 	node->cmd[0] = '\0';
 	for (i = 1; argv[i] != NULL; i++)
 	{

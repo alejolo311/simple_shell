@@ -26,7 +26,7 @@ char filename[120], *home, buf, *av[3], line[256];
 				c++;
 	} while (qty > 0);
 
-	printf("wc -l %d\n", c);
+
 	buf = c = 0;
 	lseek(fd, 0, SEEK_SET);
 

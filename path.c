@@ -10,7 +10,7 @@ char *path(char *name, lenv_s **lenv)
 {
 unsigned int i;
 int j, k;
-char *str1, *token, *tmp, **env = menv(lenv);
+char *str1, *token, *tmp = NULL, **env = menv(lenv);
 static char **paths, *pa;
 
 	if (strncmp(name, "FLUSH", 5) == 0)
@@ -49,6 +49,7 @@ static char **paths, *pa;
 		}
 		free(tmp);
 	}
+	free(env);
 
 	return (NULL);
 }

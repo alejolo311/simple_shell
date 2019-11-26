@@ -10,14 +10,20 @@
  */
 int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-pid_t pid;
-int status, ret;
-char msg[80], *sentence;
-char **env = menv(lenv);
+	pid_t pid;
+	int status, ret = 0, es; /* ret = return, es = exit status */
+	char msg[80], *sentence = NULL;
+	char **env = menv(lenv);
 
 	(void) argc;
-
 	sentence = path(argv[1], lenv);
+	if (sentence == NULL)
+	{
+		sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
+		write(STDERR_FILENO, &msg, strlen(msg));
+		free(env);
+		return (EXIT_SUCCESS);
+	}
 	pid = fork();
 	if (pid == -1)
 	{
@@ -27,18 +33,24 @@ char **env = menv(lenv);
 	else if (pid == 0)
 	{
 		ret = execve(sentence, (argv + 1), env);
-		if (ret == -1)
+		if (ret == -1)			
 		{
 			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 			write(STDERR_FILENO, &msg, strlen(msg));
-			free(sentence);
-			path("FLUSH", lenv), free(env);
-			exit(1);
+			free(sentence), free(env);
+			exit (127);
 		}
 	}
 	else
-		wait(&status);
+	{
 
+		wait(&status);
+		if ( WIFEXITED(status))
+		{
+			es = WEXITSTATUS(status);
+			printf("return of the child: %d\n", es);
+		}
+	}
 	free(sentence), free(env);
 	return (EXIT_SUCCESS);
 }
