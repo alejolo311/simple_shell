@@ -18,7 +18,8 @@ int inputfile(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
         exit(EXIT_FAILURE);
 
     while ((read = getline(&line, &len, fp)) != -1) {
-	    myexec(argc,line, lenv, execnt);
+	    printf("%s", line);
+	   /*  myexec(argc,line, lenv, execnt);*/
     }
 
     fclose(fp);

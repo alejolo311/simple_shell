@@ -88,4 +88,9 @@ char **menv(lenv_s **head);
 lenv_s *add_node(lenv_s **head, char *str);
 lenv_s *cenv(char **env);
 void free_list(lenv_s **head);
+
+
+/* input file */
+int inputfile(int argc, char **argv, lenv_s **lenv, unsigned int *execnt);
+
 #endif /* H_SHELL */
