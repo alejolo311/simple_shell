@@ -33,7 +33,6 @@ char **env = menv(lenv);
 			write(STDERR_FILENO, &msg, strlen(msg));
 			free(sentence);
 			path("FLUSH", lenv), free(env);
-		       	free_list(lenv);
 			exit(1);
 		}
 	}

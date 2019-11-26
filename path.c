@@ -43,8 +43,11 @@ static char **paths, *pa;
 		tmp = malloc((strlen(paths[k]) + strlen(name) + 2) * sizeof(char));
 		sprintf(tmp, "%s/%s", paths[k], name);
 		if (access(tmp, F_OK | R_OK | X_OK) == 0)
+		{
+			free(env);
 			return (tmp);
-		free(tmp), free(env);
+		}
+		free(tmp);
 	}
 
 	return (NULL);
