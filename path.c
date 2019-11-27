@@ -17,10 +17,10 @@ static char **paths, *pa;
 	{	free(pa), free(paths), free(env);
 		return (NULL);
 	}
-	if (access(name, F_OK | R_OK | X_OK) == 0)
+	if (access(name, F_OK | R_OK | X_OK) == 0 && name[0] == '/')
 	{	free(env);
 		return (_strdup(name));
-	}
+	} 
 	if (paths == NULL)
 	{
 		for (i = 0; env[i] != NULL; i++)
