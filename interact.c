@@ -49,7 +49,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		else
 			argc > 2 ? ret = myexec(j, argv, lenv, execnt) : argc;
 		addhist(argv), free(argv), free(tmp), free(myline), (*execnt)++;
-		if (ret == 127)
+		if (ret == 127 && inter == 0)
 		{	free(line);
 			return (127);
 		}
