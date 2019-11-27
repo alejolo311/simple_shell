@@ -364,6 +364,56 @@ quoted, then the here-doc-text is treated literally, otherwise the text is
 subjected to parameter expansion, command substitution, and arithmetic
 expansion (as described in the section on
 .Dq Expansions ) .
+If the operator is
+.Dq \*[Lt]\*[Lt]-
+instead of
+.Dq \*[Lt]\*[Lt] ,
+then leading tabs in the here-doc-text are stripped.
+.Ss Search and Execution
+There are three types of commands: shell functions, builtin commands, and
+normal programs -- and the command is searched for (by name) in that order.
+They each are executed in a different way.
+.Pp
+When a shell function is executed, all of the shell positional parameters
+(except $0, which remains unchanged) are set to the arguments of the shell
+function.
+The variables which are explicitly placed in the environment of
+the command (by placing assignments to them before the function name) are
+made local to the function and are set to the values given.
+Then the command given in the function definition is executed.
+The positional parameters are restored to their original values
+when the command completes.
+This all occurs within the current shell.
+.Pp
+Shell builtins are executed internally to the shell, without spawning a
+new process.
+.Pp
+Otherwise, if the command name doesn't match a function or builtin, the
+command is searched for as a normal program in the file system (as
+described in the next section).
+When a normal program is executed, the shell runs the program,
+passing the arguments and the environment to the program.
+If the program is not a normal executable file (i.e., if it does
+not begin with the "magic number" whose
+.Tn ASCII
+representation is "#!", so
+.Xr execve 2
+returns
+.Er ENOEXEC
+then) the shell will interpret the program in a subshell.
+The child shell will reinitialize itself in this case,
+so that the effect will be as if a
+new shell had been invoked to handle the ad-hoc shell script, except that
+the location of hashed commands located in the parent shell will be
+remembered by the child.
+.Pp
+Note that previous versions of this document and the source code itself
+misleadingly and sporadically refer to a shell script without a magic
+number as a "shell procedure".
+.Ss Path Search
+When locating a command, the shell first looks to see if it has a shell
+function by that name.
+Then it looks for a builtin command by that name.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
