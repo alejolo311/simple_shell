@@ -22,7 +22,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 		sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
 		write(STDERR_FILENO, &msg, _strlen(msg));
 		free(env);
-		return (EXIT_SUCCESS);
+		return (127);
 	}
 	pid = fork();
 	if (pid == -1)

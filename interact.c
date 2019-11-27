@@ -12,17 +12,15 @@ char **askmem(int argc, char *line);
 int interact(char **av, lenv_s **lenv, unsigned int *execnt)
 {
 size_t len = 0;
-int read = 1, j, argc = 0, inter = 1, (*f)() = NULL, builtin, ret;
+int read = 1, j, argc = 0, inter = 1, (*f)() = NULL, builtin, ret = 0;
 char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
-	do {
-		inter == 1 ?  printf("($) ") : inter;
+	do {	inter == 1 ?  write(STDOUT_FILENO, "($) ", 4) : inter;
 		fflush(stdin);
 		read = getline(&line, &len, stdin);
 		if (read == -1)
-		{
-			read == -1 && inter == 1 ? write(1, "\n", 1) : read;
+		{	read == -1 && inter == 1 ? write(1, "\n", 1) : read;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
@@ -36,28 +34,28 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 			return (-1);
 		argv[0] = av[0];
 		for (j = 1, str1 = myline; ; j++, str1 = NULL)
-		{
-			t = strtok(str1, " \t\n"), argv[j] = t;
+		{	t = strtok(str1, " \t\n"), argv[j] = t;
 			if (t == NULL)
 				break;
 		}
-		/* argv = check_variable(argv, lenv); */
 		f = check_builtin(myline);
 		if (f != NULL)
-		{
-			builtin = f(argv, lenv, execnt);
+		{	builtin = f(argv, lenv, execnt);
 			if (_strncmp(myline, "exit", 4) == 0 && builtin >= 0)
-			{
-				free(argv), free(tmp), free(myline), free(line);
+			{	free(argv), free(tmp), free(myline), free(line);
 				return (builtin);
 			}
 		}
 		else
 			argc > 2 ? ret = myexec(j, argv, lenv, execnt) : argc;
 		addhist(argv), free(argv), free(tmp), free(myline), (*execnt)++;
+		if (ret == 127)
+		{	free(line);
+			return (127);
+		}
 	} while (1);
 	free(myline), free(line);
-	return (EXIT_SUCCESS);
+	return (ret);
 }
 
 /**
