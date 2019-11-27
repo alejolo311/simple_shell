@@ -3,9 +3,10 @@
 /**
  * savehist - function history
  * desc: print the history of commands
+ * @lenv: list
  * Return: EXIT_SUCCESS in success.
  */
-int savehist(void)
+int savehist(lenv_s **lenv)
 {
 int fd = -1;         /* File Descriptor */
 int qty = 0;
@@ -18,7 +19,7 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL, *deno = NULL;
 	if (tail == NULL)
 		return (EXIT_SUCCESS);
 
-	home = getenv("HOME");
+	home = _getenv("HOME", lenv);
 	sprintf(filename, "%s/%s", home, HISTORY_FILE);
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fd <= -1)

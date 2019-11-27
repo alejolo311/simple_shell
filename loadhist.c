@@ -3,15 +3,15 @@
 /**
  * loadhist - function history
  * desc: print the history of commands
+ * @lenv: list
  * Return: EXIT_SUCCESS in success.
  */
-int loadhist(void)
+int loadhist(lenv_s **lenv)
 {
 int fd;         /* File Descriptor */
 int qty, c = 0;
 char filename[120], *home, buf, *av[3], line[256];
-
-	home = getenv("HOME");
+	home = _getenv("HOME", lenv);
 	sprintf(filename, "%s/%s", home, HISTORY_FILE);
 	fd = open(filename, O_RDWR);
 	if (fd <= -1)

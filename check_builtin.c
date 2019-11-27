@@ -28,7 +28,7 @@ int (*check_builtin(char *builtin))()
 	{
 		for (i = 0; i < built_len; i++)
 		{
-			if (strcmp(builtin, built[i].s) == 0)
+			if (_strcmp(builtin, built[i].s) == 0)
 				return (built[i].f);
 		}
 	}

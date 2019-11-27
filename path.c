@@ -13,18 +13,18 @@ int j, k;
 char *str1, *token, *tmp = NULL, **env = menv(lenv);
 static char **paths, *pa;
 
-	if (strncmp(name, "FLUSH", 5) == 0)
+	if (_strncmp(name, "FLUSH", 5) == 0)
 	{	free(pa), free(paths), free(env);
 		return (NULL);
 	}
 	if (access(name, F_OK | R_OK | X_OK) == 0 && name[0] == '/')
 	{	free(env);
 		return (_strdup(name));
-	} 
+	}
 	if (paths == NULL)
 	{
 		for (i = 0; env[i] != NULL; i++)
-			if (strncmp(env[i], "PATH", 4) == 0)
+			if (_strncmp(env[i], "PATH", 4) == 0)
 				break;
 		tmp = _strdup(env[i]);
 		for (k = 1, str1 = tmp; (token = strtok(str1, ":")); k++, str1 = NULL)
@@ -38,7 +38,7 @@ static char **paths, *pa;
 				break;	}
 	}
 	for (k = 0; paths[k] != NULL; k++)
-	{	tmp = malloc((strlen(paths[k]) + strlen(name) + 2) * sizeof(char));
+	{	tmp = malloc((_strlen(paths[k]) + _strlen(name) + 2) * sizeof(char));
 		sprintf(tmp, "%s/%s", paths[k], name);
 		if (access(tmp, F_OK | R_OK | X_OK) == 0)
 		{	free(env);

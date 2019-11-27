@@ -1,6 +1,5 @@
 #include "hsh.h"
 
-void getverenv(char **home, char **env, char *var);
 int askcwd(char **path, unsigned int size);
 void prnerr(char *prg, unsigned int *e, char *path);
 
@@ -14,11 +13,11 @@ void prnerr(char *prg, unsigned int *e, char *path);
  */
 int _cd(char **argv, lenv_s **lenv, unsigned int *e)
 {
-char ynprn = 0, *home = NULL, *pwd = NULL, *prev = NULL, *new = NULL;
-unsigned int size = 512;
-char **env = menv(lenv);
-	getverenv(&home, env, "HOME");			/* Get home from environment */
-	getverenv(&pwd, env, "OLDPWD");			/* Get oldpwd from environment */
+	char ynprn = 0, *home = NULL, *pwd = NULL, *prev = NULL, *new = NULL, *av[4];
+	unsigned int size = 512;
+
+	home = _getenv("HOME", lenv);			/* Get home from environment */
+	pwd = _getenv("OLDPWD", lenv);			/* Get oldpwd from environment */
 	if (askcwd(&prev, size) == -1)			/* Get previous path, if fail resize */
 	{
 		free(home), free(pwd);
@@ -62,35 +61,16 @@ char **env = menv(lenv);
 		free(home), free(pwd), free(prev);
 		return (-1);
 	}
-	setenv("OLDPWD", prev, 1);				/* Set the new path in environment */
-	setenv("PWD", new, 1);
+	av[0] = "./hsh", av[1] = "cd", av[2] = "OLDPWD", av[3] = prev;
+	_setenv(av, lenv, e);				/* Set the new path in environment */
+	av[0] = "./hsh", av[1] = "cd", av[2] = "PWD", av[3] = new;
+	_setenv(av, lenv, e);
 	if (ynprn)								/* Print the new path when necessary */
 		write(STDOUT_FILENO, new, _strlen(new)), write(STDOUT_FILENO, "\n", 1);
-	free(home), free(pwd), free(prev), free(new), free(env);
+	free(prev), free(new);
 
 	return (EXIT_SUCCESS);
 }
-
-/**
- * getverenv - Get the content from an environment variable
- * @home: the variable to store de value
- * @env: the enviroment
- * @var: the variable to find
- * Return: Nothing.
- */
-void getverenv(char **home, char **env, char *var)
-{
-	while (*env != NULL)
-	{
-		if (strncmp(*env, var, _strlen(var)) == 0)
-		{
-			*home = _strdup((*env) + _strlen(var) + 1);
-			break;
-		}
-		env++;
-	}
-}
-
 /**
  * askcwd - Get the current path
  * @path: the variable to store de value

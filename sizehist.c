@@ -2,16 +2,17 @@
 
 /**
  * sizehist - function history
+ * @lenv: the list
  * desc: Get the number of lines in the history file
  * Return: NUMBER oF LINES in success.
  */
-int sizehist(void)
+int sizehist(lenv_s **lenv)
 {
 int fd;         /* File Descriptor */
 int qty, c = 0;
 char filename[120], *home, buf;
 
-	home = getenv("HOME");
+	home = _getenv("HOME", lenv);
 	sprintf(filename, "%s/%s", home, HISTORY_FILE);
 	fd = open(filename, O_RDWR);
 	if (fd <= -1)

@@ -46,7 +46,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		if (f != NULL)
 		{
 			builtin = f(argv, lenv, execnt);
-			if (strncmp(myline, "exit", 4) == 0 && builtin >= 0)
+			if (_strncmp(myline, "exit", 4) == 0 && builtin >= 0)
 			{
 				free(argv), free(tmp), free(myline), free(line);
 				return (builtin);

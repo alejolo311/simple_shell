@@ -16,12 +16,12 @@ char msg[120];
 
 	(void) lenv;
 	(void) e;
-	if (strcmp(av[2], "-d") == 0)
+	if (_strcmp(av[2], "-d") == 0)
 	{
 		sprintf(msg, "history - Display or manipulate the history list.\n");
 		write(STDOUT_FILENO, msg, strlen(msg));
 	}
-	else if (strcmp(av[2], "-s") == 0)
+	else if (_strcmp(av[2], "-s") == 0)
 	{
 		sprintf(msg, "history: history [-c] [-d offset] [n] or history ");
 		sprintf(msg, "%s-anrw [filename] or history -ps arg [arg...]\n", msg);

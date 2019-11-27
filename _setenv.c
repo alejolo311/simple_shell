@@ -23,9 +23,11 @@ int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 	{
 		for (i = 0; h; i++, h = h->next)
 		{
+
 			var = h->var;
-			if (strncmp(var, variable, strlen(variable)) == 0)
+			if (_strncmp(var, variable, _strlen(variable)) == 0)
 			{
+
 				free(h->var);
 				sprintf(buffer, "%s=%s", variable, value);
 				newvalue = _strdup(buffer);

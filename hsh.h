@@ -59,8 +59,9 @@ void handsigint(int sign);
 char *path(char *name, lenv_s **env);
 int currhist(commhist_s **h, commhist_s **t);
 int addhist(char **argv);
-int savehist(void);
-int loadhist(void);
+int savehist(lenv_s **lenv);
+int sizehist(lenv_s **lenv);
+int loadhist(lenv_s **lenv);
 
 /* Function related with Built-ins */
 int (*check_builtin(char *line))();
@@ -81,6 +82,8 @@ int _hlphistory(char **av, lenv_s **lenv, unsigned int *e);
 
 int _strlen(char *s);
 char *_strdup(char *str);
+int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, int n);
 
 /* enviroment funcs */
 size_t print_list(lenv_s **head);
@@ -89,7 +92,7 @@ char **menv(lenv_s **head);
 lenv_s *add_node(lenv_s **head, char *str);
 lenv_s *cenv(char **env);
 void free_list(lenv_s **head);
-
+char *_getenv(char *name, lenv_s **lenv);
 
 /* input file */
 int inputfile(int argc, char **argv, lenv_s **lenv, unsigned int *execnt);

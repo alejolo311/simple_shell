@@ -16,7 +16,7 @@ int main(int argc, char **argv, char **env)
 
 	lenv = cenv(env);
 	signal(SIGINT, handsigint);
-	loadhist();
+	loadhist(&lenv);
 
 	if (argc > 1)
 		inputfile(argc, argv, &lenv, &execnt);
@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env)
 		read = interact(argv, &lenv, &execnt);
 
 	path("FLUSH", &lenv);
+	savehist(&lenv);
 	free_list(&lenv);
-	savehist();
 	return (read);
 }
