@@ -16,7 +16,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 
 	(void) argc;
 	pathos = _getenv("PATH", lenv);
-	if (_strncmp(pathos, ":", 1) == 0 || _strcmp(pathos, "") == 0)
+	if (_strncmp(pathos, ":", 1) == 0)
 	{	tmp = _strdup(argv[1]);
 		sentence = tmp;
 		if (access(sentence, F_OK | R_OK | X_OK) == -1)
