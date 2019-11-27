@@ -332,6 +332,38 @@ Same, but override the
 .Fl C
 option.
 .It [n] Ns \*[Gt]\*[Gt] file
+Append standard output (or n) to file.
+.It [n] Ns \*[Lt] file
+Redirect standard input (or n) from file.
+.It [n1] Ns \*[Lt]& Ns n2
+Duplicate standard input (or n1) from file descriptor n2.
+.It [n] Ns \*[Lt]&-
+Close standard input (or n).
+.It [n1] Ns \*[Gt]& Ns n2
+Duplicate standard output (or n1) to n2.
+.It [n] Ns \*[Gt]&-
+Close standard output (or n).
+.It [n] Ns \*[Lt]\*[Gt] file
+Open file for reading and writing on standard input (or n).
+.El
+.Pp
+The following redirection is often called a
+.Dq here-document .
+.Bl -item -offset indent
+.It
+.Li [n]\*[Lt]\*[Lt] delimiter
+.Dl here-doc-text ...
+.Li delimiter
+.El
+.Pp
+All the text on successive lines up to the delimiter is saved away and
+made available to the command on standard input, or file descriptor n if
+it is specified.
+If the delimiter as specified on the initial line is
+quoted, then the here-doc-text is treated literally, otherwise the text is
+subjected to parameter expansion, command substitution, and arithmetic
+expansion (as described in the section on
+.Dq Expansions ) .
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
