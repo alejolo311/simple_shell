@@ -94,6 +94,73 @@ substituting for
 .Dq .shinit
 any filename you wish.
 .Pp
+If command line arguments besides the options have been specified, then
+the shell treats the first argument as the name of a file from which to
+read commands (a shell script), and the remaining arguments are set as the
+positional parameters of the shell ($1, $2, etc).
+Otherwise, the shell
+reads commands from its standard input.
+.Ss Argument List Processing
+All of the single letter options that have a corresponding name can be
+used as an argument to the
+.Fl o
+option.
+The set
+.Fl o
+name is provided next to the single letter option in
+the description below.
+Specifying a dash
+.Dq -
+turns the option on, while using a plus
+.Dq +
+disables the option.
+The following options can be set from the command line or
+with the
+.Ic set
+builtin (described later).
+.Bl -tag -width aaaallexportfoo -offset indent
+.It Fl a Em allexport
+Export all variables assigned to.
+.It Fl c
+Read commands from the
+.Ar command_string
+operand instead of from the standard input.
+Special parameter 0 will be set from the
+.Ar command_name
+operand and the positional parameters ($1, $2, etc.)
+set from the remaining argument operands.
+.It Fl C Em noclobber
+Don't overwrite existing files with
+.Dq \*[Gt] .
+.It Fl e Em errexit
+If not interactive, exit immediately if any untested command fails.
+The exit status of a command is considered to be
+explicitly tested if the command is used to control an
+.Ic if ,
+.Ic elif ,
+.Ic while ,
+or
+.Ic until ;
+or if the command is the left hand operand of an
+.Dq &&
+or
+.Dq ||
+operator.
+.It Fl f Em noglob
+Disable pathname expansion.
+.It Fl n Em noexec
+If not interactive, read commands but do not execute them.
+This is useful for checking the syntax of shell scripts.
+.It Fl u Em nounset
+Write a message to standard error when attempting to expand a variable
+that is not set, and if the shell is not interactive, exit immediately.
+.It Fl v Em verbose
+The shell writes its input to standard error as it is read.
+Useful for debugging.
+.It Fl x Em xtrace
+Write each command to standard error (preceded by a
+.Sq +\  )
+before it is executed.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
