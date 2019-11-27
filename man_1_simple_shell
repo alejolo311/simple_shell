@@ -832,6 +832,74 @@ Pathname expansion is not performed on the results of the expansion.
 Field splitting is not performed on the results of the
 expansion, with the exception of @.
 .El
+.Pp
+In addition, a parameter expansion can be modified by using one of the
+following formats.
+.Bl -tag -width aaparameterwordaaaaa
+.It ${parameter:-word}
+Use Default Values.
+If parameter is unset or null, the expansion of word
+is substituted; otherwise, the value of parameter is substituted.
+.It ${parameter:=word}
+Assign Default Values.
+If parameter is unset or null, the expansion of
+word is assigned to parameter.
+In all cases, the final value of parameter is substituted.
+Only variables, not positional parameters or special
+parameters, can be assigned in this way.
+.It ${parameter:?[word]}
+Indicate Error if Null or Unset.
+If parameter is unset or null, the
+expansion of word (or a message indicating it is unset if word is omitted)
+is written to standard error and the shell exits with a nonzero exit status.
+Otherwise, the value of parameter is substituted.
+An interactive shell need not exit.
+.It ${parameter:+word}
+Use Alternative Value.
+If parameter is unset or null, null is
+substituted; otherwise, the expansion of word is substituted.
+.El
+.Pp
+In the parameter expansions shown previously, use of the colon in the
+format results in a test for a parameter that is unset or null; omission
+of the colon results in a test for a parameter that is only unset.
+.Bl -tag -width aaparameterwordaaaaa
+.It ${#parameter}
+String Length.
+The length in characters of the value of parameter.
+.El
+.Pp
+The following four varieties of parameter expansion provide for substring
+processing.
+In each case, pattern matching notation (see
+.Sx Shell Patterns ) ,
+rather than regular expression notation, is used to evaluate the patterns.
+If parameter is * or @, the result of the expansion is unspecified.
+Enclosing the full parameter expansion string in double-quotes does not
+cause the following four varieties of pattern characters to be quoted,
+whereas quoting characters within the braces has this effect.
+.Bl -tag -width aaparameterwordaaaaa
+.It ${parameter%word}
+Remove Smallest Suffix Pattern.
+The word is expanded to produce a pattern.
+The parameter expansion then results in parameter, with the
+smallest portion of the suffix matched by the pattern deleted.
+.It ${parameter%%word}
+Remove Largest Suffix Pattern.
+The word is expanded to produce a pattern.
+The parameter expansion then results in parameter, with the largest
+portion of the suffix matched by the pattern deleted.
+.It ${parameter#word}
+Remove Smallest Prefix Pattern.
+The word is expanded to produce a pattern.
+The parameter expansion then results in parameter, with the
+smallest portion of the prefix matched by the pattern deleted.
+.It ${parameter##word}
+Remove Largest Prefix Pattern.
+The word is expanded to produce a pattern.
+The parameter expansion then results in parameter, with the largest
+portion of the prefix matched by the pattern deleted.
+.El
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
