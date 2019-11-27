@@ -801,6 +801,37 @@ the tilde is replaced with the value of the
 .Va HOME
 variable (the current user's home directory).
 .Ss Parameter Expansion
+The format for parameter expansion is as follows:
+.Pp
+.Dl ${expression}
+.Pp
+where expression consists of all characters until the matching
+.Dq } .
+Any
+.Dq }
+escaped by a backslash or within a quoted string, and characters in
+embedded arithmetic expansions, command substitutions, and variable
+expansions, are not examined in determining the matching
+.Dq } .
+.Pp
+The simplest form for parameter expansion is:
+.Pp
+.Dl ${parameter}
+.Pp
+The value, if any, of parameter is substituted.
+.Pp
+The parameter name or symbol can be enclosed in braces, which are
+optional except for positional parameters with more than one digit or
+when parameter is followed by a character that could be interpreted as
+part of the name.
+If a parameter expansion occurs inside double-quotes:
+.Bl -enum
+.It
+Pathname expansion is not performed on the results of the expansion.
+.It
+Field splitting is not performed on the results of the
+expansion, with the exception of @.
+.El
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
