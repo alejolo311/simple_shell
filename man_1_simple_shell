@@ -558,6 +558,38 @@ then    list ] ...
 fi
 .Ed
 .Pp
+The syntax of the while command is
+.Bd -literal -offset indent
+while list
+do   list
+done
+.Ed
+.Pp
+The two lists are executed repeatedly while the exit status of the
+first list is zero.
+The until command is similar, but has the word
+until in place of while, which causes it to
+repeat until the exit status of the first list is zero.
+.Pp
+The syntax of the for command is
+.Bd -literal -offset indent
+for variable [ in [ word ... ] ]
+do   list
+done
+.Ed
+.Pp
+The words following
+.Pa in
+are expanded, and then the list is executed repeatedly with the
+variable set to each word in turn.
+Omitting in word ... is equivalent to in "$@".
+.Pp
+The syntax of the break and continue command is
+.Bd -literal -offset indent
+break [ num ]
+continue [ num ]
+.Ed
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
