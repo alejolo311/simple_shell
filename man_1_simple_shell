@@ -441,6 +441,123 @@ should indicate the various exit codes and what they mean.
 Additionally, the builtin commands return exit codes, as does
 an executed shell function.
 .Pp
+If a command consists entirely of variable assignments then the
+exit status of the command is that of the last command substitution
+if any, otherwise 0.
+.Ss Complex Commands
+Complex commands are combinations of simple commands with control
+operators or reserved words, together creating a larger complex command.
+More generally, a command is one of the following:
+.Bl -bullet
+.It
+simple command
+.It
+pipeline
+.It
+list or compound-list
+.It
+compound command
+.It
+function definition
+.El
+.Pp
+Unless otherwise stated, the exit status of a command is that of the last
+simple command executed by the command.
+.Ss Pipelines
+A pipeline is a sequence of one or more commands separated
+by the control operator |.
+The standard output of all but
+the last command is connected to the standard input
+of the next command.
+The standard output of the last
+command is inherited from the shell, as usual.
+.Pp
+The format for a pipeline is:
+.Pp
+.Dl [!] command1 [ | command2 ...]
+.Pp
+The standard output of command1 is connected to the standard input of
+command2.
+The standard input, standard output, or both of a command is
+considered to be assigned by the pipeline before any redirection specified
+by redirection operators that are part of the command.
+.Pp
+If the pipeline is not in the background (discussed later), the shell
+waits for all commands to complete.
+.Pp
+If the reserved word ! does not precede the pipeline, the exit status is
+the exit status of the last command specified in the pipeline.
+Otherwise, the exit status is the logical NOT of the exit status of the
+last command.
+That is, if the last command returns zero, the exit status
+is 1; if the last command returns greater than zero, the exit status is
+zero.
+.Pp
+Because pipeline assignment of standard input or standard output or both
+takes place before redirection, it can be modified by redirection.
+For example:
+.Pp
+.Dl $ command1 2\*[Gt]&1 | command2
+.Pp
+sends both the standard output and standard error of command1
+to the standard input of command2.
+.Pp
+A ; or
+.Aq newline
+terminator causes the preceding AND-OR-list (described
+next) to be executed sequentially; a & causes asynchronous execution of
+the preceding AND-OR-list.
+.Pp
+Note that unlike some other shells, each process in the pipeline is a
+child of the invoking shell (unless it is a shell builtin, in which case
+it executes in the current shell -- but any effect it has on the
+environment is wiped).
+.Ss Background Commands -- &
+If a command is terminated by the control operator ampersand (&), the
+shell executes the command asynchronously -- that is, the shell does not
+wait for the command to finish before executing the next command.
+.Pp
+The format for running a command in background is:
+.Pp
+.Dl command1 & [command2 & ...]
+.Pp
+If the shell is not interactive, the standard input of an asynchronous
+command is set to
+.Pa /dev/null .
+.Ss Lists -- Generally Speaking
+A list is a sequence of zero or more commands separated by newlines,
+semicolons, or ampersands, and optionally terminated by one of these three
+characters.
+The commands in a list are executed in the order they are written.
+If command is followed by an ampersand, the shell starts the
+command and immediately proceed onto the next command; otherwise it waits
+for the command to terminate before proceeding to the next one.
+.Ss Short-Circuit List Operators
+.Dq &&
+and
+.Dq ||
+are AND-OR list operators.
+.Dq &&
+executes the first command, and then executes the second command iff the
+exit status of the first command is zero.
+.Dq ||
+is similar, but executes the second command iff the exit status of the first
+command is nonzero.
+.Dq &&
+and
+.Dq ||
+both have the same priority.
+.Ss Flow-Control Constructs -- if, while, for, case
+The syntax of the if command is
+.Bd -literal -offset indent
+if list
+then list
+[ elif list
+then    list ] ...
+[ else list ]
+fi
+.Ed
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
