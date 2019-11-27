@@ -995,6 +995,88 @@ A left bracket
 introduces a character class.
 The end of the character class is indicated by a
 .Pq Dq \&] ;
+if the
+.Dq \&]
+is missing then the
+.Dq \&[
+matches a
+.Dq \&[
+rather than introducing a character class.
+A character class matches any of the characters between the square brackets.
+A range of characters may be specified using a minus sign.
+The character class may be complemented
+by making an exclamation point the first character of the character class.
+.Pp
+To include a
+.Dq \&]
+in a character class, make it the first character listed (after the
+.Dq \&! ,
+if any).
+To include a minus sign, make it the first or last character listed.
+.Ss Builtins
+This section lists the builtin commands which are builtin because they
+need to perform some operation that can't be performed by a separate
+process.
+In addition to these, there are several other commands that may
+be builtin for efficiency (e.g.
+.Xr printf 1 ,
+.Xr echo 1 ,
+.Xr test 1 ,
+etc).
+.Bl -tag -width 5n
+.It :
+.It true
+A null command that returns a 0 (true) exit value.
+.It \&. file
+The commands in the specified file are read and executed by the shell.
+.It alias Op Ar name Ns Op Ar "=string ..."
+If
+.Ar name=string
+is specified, the shell defines the alias
+.Ar name
+with value
+.Ar string .
+If just
+.Ar name
+is specified, the value of the alias
+.Ar name
+is printed.
+With no arguments, the
+.Ic alias
+builtin prints the
+names and values of all defined aliases (see
+.Ic unalias ) .
+.It bg [ Ar job ] ...
+Continue the specified jobs (or the current job if no
+jobs are given) in the background.
+.It Xo command
+.Op Fl p
+.Op Fl v
+.Op Fl V
+.Ar command
+.Op Ar arg ...
+.Xc
+Execute the specified command but ignore shell functions when searching
+for it.
+(This is useful when you
+have a shell function with the same name as a builtin command.)
+.Bl -tag -width 5n
+.It Fl p
+search for command using a
+.Ev PATH
+that guarantees to find all the standard utilities.
+.It Fl V
+Do not execute the command but
+search for the command and print the resolution of the
+command search.
+This is the same as the type builtin.
+.It Fl v
+Do not execute the command but
+search for the command and print the absolute pathname
+of utilities, the name for builtins or the expansion of aliases.
+.El
+.It cd Ar -
+.It Xo cd Op Fl LP
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
