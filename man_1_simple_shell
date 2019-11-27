@@ -222,6 +222,29 @@ is treated as a line continuation.
 Enclosing characters in single quotes preserves the literal meaning of all
 the characters (except single quotes, making it impossible to put
 single-quotes in a single-quoted string).
+.Ss Double Quotes
+Enclosing characters within double quotes preserves the literal
+meaning of all characters except dollarsign
+.Pq $ ,
+backquote
+.Pq ` ,
+and backslash
+.Pq \e .
+The backslash inside double quotes is historically weird, and serves to
+quote only the following characters:
+.Dl $  `  \*q  \e  \*[Lt]newline\*[Gt] .
+Otherwise it remains literal.
+.Ss Reserved Words
+Reserved words are words that have special meaning to the
+shell and are recognized at the beginning of a line and
+after a control operator.
+The following are reserved words:
+.Bl -column while while while while while -offset indent
+.It ! Ta elif Ta fi Ta while Ta case
+.It else Ta for Ta then Ta { Ta }
+.It do Ta done Ta until Ta if Ta esac
+.El
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
