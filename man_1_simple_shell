@@ -1169,6 +1169,39 @@ If
 .Ar exitstatus
 is given it is used as the exit status of the shell; otherwise the
 exit status of the preceding command is used.
+.It export Ar name ...
+.It export Fl p
+The specified names are exported so that they will appear in the
+environment of subsequent commands.
+The only way to un-export a variable is to unset it.
+The shell allows the value of a variable to be set at the
+same time it is exported by writing
+.Pp
+.Dl export name=value
+.Pp
+With no arguments the export command lists the names of all exported variables.
+With the
+.Fl p
+option specified the output will be formatted suitably for non-interactive use.
+.It Xo fc Op Fl e Ar editor
+.Op Ar first Op Ar last
+.Xc
+.It Xo fc Fl l
+.Op Fl nr
+.Op Ar first Op Ar last
+.Xc
+.It Xo fc Fl s Op Ar old=new
+.Op Ar first
+.Xc
+The
+.Ic fc
+builtin lists, or edits and re-executes, commands previously entered
+to an interactive shell.
+.Bl -tag -width 5n
+.It Fl e No editor
+Use the editor named by editor to edit the commands.
+The editor string is a command name, subject to search via the
+.Ev PATH
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
