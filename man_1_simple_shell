@@ -1556,6 +1556,298 @@ A `\-' overrides a `0' if both are used;
 .It "Field Width:"
 An optional digit string specifying a
 .Em field width ;
+if the output string has fewer characters than the field width it will
+be blank-padded on the left (or right, if the left-adjustment indicator
+has been given) to make up the field width (note that a leading zero
+is a flag, but an embedded zero is part of a field width);
+.It Precision :
+An optional period,
+.Sq Cm \&.\& ,
+followed by an optional digit string giving a
+.Em precision
+which specifies the number of digits to appear after the decimal point,
+for
+.Cm e
+and
+.Cm f
+formats, or the maximum number of characters to be printed
+from a string
+.Sm off
+.Pf ( Cm b
+.Sm on
+and
+.Cm s
+formats); if the digit string is missing, the precision is treated
+as zero;
+.It Format :
+A character which indicates the type of format to use (one of
+.Cm diouxXfwEgGbcs ) .
+.El
+.Pp
+A field width or precision may be
+.Sq Cm \&*
+instead of a digit string.
+In this case an
+.Ar argument
+supplies the field width or precision.
+.Pp
+The format characters and their meanings are:
+.Bl -tag -width Fl
+.It Cm diouXx
+The
+.Ar argument
+is printed as a signed decimal (d or i), unsigned octal, unsigned decimal,
+or unsigned hexadecimal (X or x), respectively.
+.It Cm f
+The
+.Ar argument
+is printed in the style
+.Sm off
+.Pf [\-]ddd Cm \&. No ddd
+.Sm on
+where the number of d's
+after the decimal point is equal to the precision specification for
+the argument.
+If the precision is missing, 6 digits are given; if the precision
+is explicitly 0, no digits and no decimal point are printed.
+.It Cm eE
+The
+.Ar argument
+is printed in the style
+.Sm off
+.Pf [\-]d Cm \&. No ddd Cm e No \\*(Pmdd
+.Sm on
+where there
+is one digit before the decimal point and the number after is equal to
+the precision specification for the argument; when the precision is
+missing, 6 digits are produced.
+An upper-case E is used for an `E' format.
+.It Cm gG
+The
+.Ar argument
+is printed in style
+.Cm f
+or in style
+.Cm e
+.Pq Cm E
+whichever gives full precision in minimum space.
+.It Cm b
+Characters from the string
+.Ar argument
+are printed with backslash-escape sequences expanded.
+.br
+The following additional backslash-escape sequences are supported:
+.Bl -tag -width Ds
+.It Cm \ec
+Causes
+.Nm
+to ignore any remaining characters in the string operand containing it,
+any remaining string operands, and any additional characters in
+the format operand.
+.It Cm \e0 Ns Ar num
+Write an 8\-bit character whose
+.Tn ASCII
+value is the 1\-, 2\-, or 3\-digit
+octal number
+.Ar num .
+.El
+.It Cm c
+The first character of
+.Ar argument
+is printed.
+.It Cm s
+Characters from the string
+.Ar argument
+are printed until the end is reached or until the number of characters
+indicated by the precision specification is reached; if the
+precision is omitted, all characters in the string are printed.
+.It Cm \&%
+Print a `%'; no argument is used.
+.El
+.Pp
+In no case does a non-existent or small field width cause truncation of
+a field; padding takes place only if the specified field width exceeds
+the actual width.
+.It Xo set
+.Oo {
+.Fl options | Cm +options | Cm -- }
+.Oc Ar arg ...
+.Xc
+The
+.Ic set
+command performs three different functions.
+.Pp
+With no arguments, it lists the values of all shell variables.
+.Pp
+If options are given, it sets the specified option
+flags, or clears them as described in the section called
+.Sx Argument List Processing .
+As a special case, if the option is -o or +o and no argument is
+supplied, the shell prints the settings of all its options.  If the
+option is -o, the settings are printed in a human-readable format; if
+the option is +o, the settings are printed in a format suitable for
+reinput to the shell to affect the same option settings.
+.Pp
+The third use of the set command is to set the values of the shell's
+positional parameters to the specified args.
+To change the positional
+parameters without changing any options, use
+.Dq --
+as the first argument to set.
+If no args are present, the set command
+will clear all the positional parameters (equivalent to executing
+.Dq shift $# . )
+.It shift Op Ar n
+Shift the positional parameters n times.
+A
+.Ic shift
+sets the value of
+.Va $1
+to the value of
+.Va $2 ,
+the value of
+.Va $2
+to the value of
+.Va $3 ,
+and so on, decreasing
+the value of
+.Va $#
+by one.
+If n is greater than the number of positional parameters,
+.Ic shift
+will issue an error message, and exit with return status 2.
+.It test Ar expression
+.It \&[ Ar expression Cm ]
+The
+.Ic test
+utility evaluates the expression and, if it evaluates
+to true, returns a zero (true) exit status; otherwise
+it returns 1 (false).
+If there is no expression, test also
+returns 1 (false).
+.Pp
+All operators and flags are separate arguments to the
+.Ic test
+utility.
+.Pp
+The following primaries are used to construct expression:
+.Bl -tag -width Ar
+.It Fl b Ar file
+True if
+.Ar file
+exists and is a block special
+file.
+.It Fl c Ar file
+True if
+.Ar file
+exists and is a character
+special file.
+.It Fl d Ar file
+True if
+.Ar file
+exists and is a directory.
+.It Fl e Ar file
+True if
+.Ar file
+exists (regardless of type).
+.It Fl f Ar file
+True if
+.Ar file
+exists and is a regular file.
+.It Fl g Ar file
+True if
+.Ar file
+exists and its set group ID flag
+is set.
+.It Fl h Ar file
+True if
+.Ar file
+exists and is a symbolic link.
+.It Fl k Ar file
+True if
+.Ar file
+exists and its sticky bit is set.
+.It Fl n Ar string
+True if the length of
+.Ar string
+is nonzero.
+.It Fl p Ar file
+True if
+.Ar file
+is a named pipe
+.Po Tn FIFO Pc .
+.It Fl r Ar file
+True if
+.Ar file
+exists and is readable.
+.It Fl s Ar file
+True if
+.Ar file
+exists and has a size greater
+than zero.
+.It Fl t Ar file_descriptor
+True if the file whose file descriptor number
+is
+.Ar file_descriptor
+is open and is associated with a terminal.
+.It Fl u Ar file
+True if
+.Ar file
+exists and its set user ID flag
+is set.
+.It Fl w Ar file
+True if
+.Ar file
+exists and is writable.
+True
+indicates only that the write flag is on.
+The file is not writable on a read-only file
+system even if this test indicates true.
+.It Fl x Ar file
+True if
+.Ar file
+exists and is executable.
+True
+indicates only that the execute flag is on.
+If
+.Ar file
+is a directory, true indicates that
+.Ar file
+can be searched.
+.It Fl z Ar string
+True if the length of
+.Ar string
+is zero.
+.It Fl L Ar file
+True if
+.Ar file
+exists and is a symbolic link.
+This operator is retained for compatibility with previous versions of
+this program.
+Do not rely on its existence; use
+.Fl h
+instead.
+.It Fl O Ar file
+True if
+.Ar file
+exists and its owner matches the effective user id of this process.
+.It Fl G Ar file
+True if
+.Ar file
+exists and its group matches the effective group id of this process.
+.It Fl S Ar file
+True if
+.Ar file
+exists and is a socket.
+.It Ar file1 Fl nt Ar file2
+True if
+.Ar file1
+and
+.Ar file2
+exist and
+.Ar file1
+is newer than
+.Ar file2 .
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
