@@ -2196,6 +2196,44 @@ command.
 .It Ev PPID
 The process ID of the parent process of the shell.
 .El
+.Sh EXAMPLES
+Below an example of interactive mode:
+.It
+$ ./hsh
+.It
+($) /bin/ls
+.It
+hsh main.c shell.c
+.It
+($)
+.It
+($) exit
+.It
+$
+.Pp
+Below an example of non-interactive mode:
+.It
+$ echo "/bin/ls" | ./hsh
+.It
+hsh main.c shell.c test_ls_2
+.It
+$
+.It
+$ cat test_ls_2
+.It
+/bin/ls
+.It
+/bin/ls
+.It
+$
+.It
+$ cat test_ls_2 | ./hsh
+.It
+hsh main.c shell.c test_ls_2
+.It
+hsh main.c shell.c test_ls_2
+.It
+$
 .Sh FILES
 .Bl -item -width HOMEprofilexxxx
 .It
@@ -2230,8 +2268,8 @@ in 2002.
 Holberton School implementation
 .Sh AUTHORS
 Alejandro Lopez
-.Nm
-Gonzalo Gomez Millan
+.An -split
+- Gonzalo Gomez Millan
 .Sh BUGS
 According to the checker 7 bugs.
 .\" ============================================================================================
