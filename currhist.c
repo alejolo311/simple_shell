@@ -8,7 +8,7 @@
  */
 int currhist(commhist_s **h, commhist_s **t)
 {
-static commhist_s *head = NULL, *tail = NULL;
+static commhist_s *head, *tail;
 
 	if (h == NULL)
 		head = NULL;

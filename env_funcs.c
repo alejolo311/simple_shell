@@ -10,6 +10,7 @@ lenv_s *cenv(char **env)
 {
 	int i;
 	lenv_s *lenv;
+
 	lenv = NULL;
 	for (i = 1; env[i] != NULL; i++)
 	{

@@ -33,19 +33,16 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 	else if (pid == 0)
 	{
 		ret = execve(sentence, (argv + 1), env);
-		if (ret == -1)			
+		if (ret == -1)
 		{
-			sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
-			write(STDERR_FILENO, &msg, strlen(msg));
-			free(sentence), free(env);
-			exit (127);
+			exit(127);
 		}
 	}
 	else
 	{
 
 		wait(&status);
-		if ( WIFEXITED(status))
+		if (WIFEXITED(status))
 		{
 			es = WEXITSTATUS(status);
 			(void) es;

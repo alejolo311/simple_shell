@@ -34,9 +34,9 @@ int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 				break;
 			}
 		}
-		if(asign == 0)
+		if (asign == 0)
 		{
-			sprintf(buffer,"%s=%s", variable, value);	
+			sprintf(buffer, "%s=%s", variable, value);
 			add_node(lenv, buffer);
 		}
 	}

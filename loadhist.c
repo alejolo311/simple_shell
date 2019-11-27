@@ -7,29 +7,23 @@
  */
 int loadhist(void)
 {
-int fd;         /* File Descriptor */
-int qty, c = 0;
-char filename[120], *home, buf, *av[3], line[256];
+	int fd;         /* File Descriptor */
+	int qty, c = 0;
+	char filename[120], *home, buf, *av[3], line[256];
 
-	home = getenv("HOME");
-	sprintf(filename, "%s/%s", home, HISTORY_FILE);
+	home = getenv("HOME"), sprintf(filename, "%s/%s", home, HISTORY_FILE);
 	fd = open(filename, O_RDWR);
 	if (fd <= -1)
 		return (-1);
-
 	do {
 		qty = read(fd, &buf, 1);
 		if (qty <= -1)
 			return (0);
 		if (qty > 0)
-			if (buf == '\n')
-				c++;
+			buf == '\n' ? c++ : buf;
 	} while (qty > 0);
-
-
 	buf = c = 0;
 	lseek(fd, 0, SEEK_SET);
-
 	do {
 		qty = read(fd, &buf, 1);
 		if (qty > 0)
@@ -50,9 +44,7 @@ char filename[120], *home, buf, *av[3], line[256];
 		if (qty <= -1)
 			return (0);
 	} while (qty > 0);
-
 	if (close(fd) == -1)
 		return (-1);
-
 	return (EXIT_SUCCESS);
 }
