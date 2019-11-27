@@ -1848,6 +1848,89 @@ exist and
 .Ar file1
 is newer than
 .Ar file2 .
+.It Ar file1 Fl ot Ar file2
+True if
+.Ar file1
+and
+.Ar file2
+exist and
+.Ar file1
+is older than
+.Ar file2 .
+.It Ar file1 Fl ef Ar file2
+True if
+.Ar file1
+and
+.Ar file2
+exist and refer to the same file.
+.It Ar string
+True if
+.Ar string
+is not the null
+string.
+.It Ar \&s\&1 Cm \&= Ar \&s\&2
+True if the strings
+.Ar \&s\&1
+and
+.Ar \&s\&2
+are identical.
+.It Ar \&s\&1 Cm \&!= Ar \&s\&2
+True if the strings
+.Ar \&s\&1
+and
+.Ar \&s\&2
+are not identical.
+.It Ar \&s\&1 Cm \&\*[Lt] Ar \&s\&2
+True if string
+.Ar \&s\&1
+comes before
+.Ar \&s\&2
+based on the ASCII value of their characters.
+.It Ar \&s\&1 Cm \&\*[Gt] Ar \&s\&2
+True if string
+.Ar \&s\&1
+comes after
+.Ar \&s\&2
+based on the ASCII value of their characters.
+.It Ar \&n\&1 Fl \&eq Ar \&n\&2
+True if the integers
+.Ar \&n\&1
+and
+.Ar \&n\&2
+are algebraically
+equal.
+.It Ar \&n\&1 Fl \&ne Ar \&n\&2
+True if the integers
+.Ar \&n\&1
+and
+.Ar \&n\&2
+are not
+algebraically equal.
+.It Ar \&n\&1 Fl \&gt Ar \&n\&2
+True if the integer
+.Ar \&n\&1
+is algebraically
+greater than the integer
+.Ar \&n\&2 .
+.It Ar \&n\&1 Fl \&ge Ar \&n\&2
+True if the integer
+.Ar \&n\&1
+is algebraically
+greater than or equal to the integer
+.Ar \&n\&2 .
+.It Ar \&n\&1 Fl \&lt Ar \&n\&2
+True if the integer
+.Ar \&n\&1
+is algebraically less
+than the integer
+.Ar \&n\&2 .
+.It Ar \&n\&1 Fl \&le Ar \&n\&2
+True if the integer
+.Ar \&n\&1
+is algebraically less
+than or equal to the integer
+.Ar \&n\&2 .
+.El
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
