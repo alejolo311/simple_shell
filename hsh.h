@@ -15,6 +15,8 @@
 #include <signal.h>
 
 #define HISTORY_FILE ".simple_shell_history"
+extern char **environ;
+
 
 /**
  * struct commhist - Structure for the command history
