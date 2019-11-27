@@ -1467,6 +1467,95 @@ option specified the output will be formatted suitably for non-interactive use.
 formats and prints its arguments, after the first, under control
 of the
 .Ar format  .
+The characters and their meanings are as follows:
+.Bl -tag -width Ds -offset indent
+.It Cm \ea
+Write a \*[Lt]bell\*[Gt] character.
+.It Cm \eb
+Write a \*[Lt]backspace\*[Gt] character.
+.It Cm \ef
+Write a \*[Lt]form-feed\*[Gt] character.
+.It Cm \en
+Write a \*[Lt]new-line\*[Gt] character.
+.It Cm \er
+Write a \*[Lt]carriage return\*[Gt] character.
+.It Cm \et
+Write a \*[Lt]tab\*[Gt] character.
+.It Cm \ev
+Write a \*[Lt]vertical tab\*[Gt] character.
+.It Cm \e\e
+Write a backslash character.
+.It Cm \e Ns Ar num
+Write an 8\-bit character whose
+.Tn ASCII
+value is the 1\-, 2\-, or 3\-digit
+octal number
+.Ar num .
+.El
+.Pp
+Each format specification is introduced by the percent character
+(``%'').
+The remainder of the format specification includes,
+in the following order:
+.Bl -tag -width Ds
+.It "Zero or more of the following flags:"
+.Bl -tag -width Ds
+.It Cm #
+A `#' character
+specifying that the value should be printed in an ``alternative form''.
+For
+.Cm b ,
+.Cm c ,
+.Cm d ,
+and
+.Cm s
+formats, this option has no effect.
+For the
+.Cm o
+format the precision of the number is increased to force the first
+character of the output string to a zero.
+For the
+.Cm x
+.Pq Cm X
+format, a non-zero result has the string
+.Li 0x
+.Pq Li 0X
+prepended to it.
+For
+.Cm e  ,
+.Cm E ,
+.Cm f  ,
+.Cm g ,
+and
+.Cm G
+formats, the result will always contain a decimal point, even if no
+digits follow the point (normally, a decimal point only appears in the
+results of those formats if a digit follows the decimal point).
+For
+.Cm g
+and
+.Cm G
+formats, trailing zeros are not removed from the result as they
+would otherwise be.
+.It Cm \&\-
+A minus sign `\-' which specifies
+.Em left adjustment
+of the output in the indicated field;
+.It Cm \&+
+A `+' character specifying that there should always be
+a sign placed before the number when using signed formats.
+.It Sq \&\ \&
+A space specifying that a blank should be left before a positive number
+for a signed format.
+A `+' overrides a space if both are used;
+.It Cm \&0
+A zero `0' character indicating that zero-padding should be used
+rather than blank-padding.
+A `\-' overrides a `0' if both are used;
+.El
+.It "Field Width:"
+An optional digit string specifying a
+.Em field width ;
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
