@@ -26,8 +26,8 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 			free(line);
 			return (EXIT_SUCCESS);
 		}
-		myline = strdup(line);
-		tmp = strdup(myline);
+		myline = _strdup(line);
+		tmp = _strdup(myline);
 		for (argc = 1, str1 = tmp; (t = strtok(str1, " \t\n")); argc++, str1 = NULL)
 			if (t == NULL)
 				break;

@@ -28,7 +28,7 @@ int _setenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 			{
 				free(h->var);
 				sprintf(buffer, "%s=%s", variable, value);
-				newvalue = strdup(buffer);
+				newvalue = _strdup(buffer);
 				h->var = newvalue;
 				asign = 1;
 				break;

@@ -19,18 +19,18 @@ static char **paths, *pa;
 	}
 	if (access(name, F_OK | R_OK | X_OK) == 0)
 	{	free(env);
-		return (strdup(name));
+		return (_strdup(name));
 	}
 	if (paths == NULL)
 	{
 		for (i = 0; env[i] != NULL; i++)
 			if (strncmp(env[i], "PATH", 4) == 0)
 				break;
-		tmp = strdup(env[i]);
+		tmp = _strdup(env[i]);
 		for (k = 1, str1 = tmp; (token = strtok(str1, ":")); k++, str1 = NULL)
 			if (token == NULL)
 				break;
-		free(tmp), pa = strdup(env[i]);
+		free(tmp), pa = _strdup(env[i]);
 		paths = malloc(k * sizeof(char **));
 		for (j = 0, str1 = (pa + 5); ; j++, str1 = NULL)
 		{	paths[j] = strtok(str1, ":");

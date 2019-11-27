@@ -19,7 +19,7 @@ int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 	if (ret < 0)
 	{
 		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *e, argv[1], ret);
-		write(STDERR_FILENO, &msg, strlen(msg));
+		write(STDERR_FILENO, &msg, _strlen(msg));
 	}
 
 	return (ret);
