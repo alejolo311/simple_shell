@@ -15,11 +15,13 @@ int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 
 	if (argv[2] == NULL)
 		return (0);
-	ret = atoi(argv[2]);
-	if (ret < 0)
+	ret = _atoi(argv[2]);
+	printf("%d", ret);
+	if (ret <= 0)
 	{
 		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *e, argv[1], ret);
 		write(STDERR_FILENO, &msg, _strlen(msg));
+		ret = 2;
 	}
 	else if (ret > 255)
 	{
