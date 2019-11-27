@@ -17,7 +17,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 
 	isatty(STDIN_FILENO) == 0 ? inter = 0 : inter;
 	do {
-		inter == 1 ?  printf("#cisfun$ ") : inter;
+		inter == 1 ?  printf("($) ") : inter;
 		fflush(stdin);
 		read = getline(&line, &len, stdin);
 		if (read == -1)
