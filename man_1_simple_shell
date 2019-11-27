@@ -590,6 +590,37 @@ break [ num ]
 continue [ num ]
 .Ed
 .Pp
+Break terminates the num innermost for or while loops.
+Continue continues with the next iteration of the innermost loop.
+These are implemented as builtin commands.
+.Pp
+The syntax of the case command is
+.Bd -literal -offset indent
+case word in
+[(]pattern) list ;;
+\&...
+esac
+.Ed
+.Pp
+The pattern can actually be one or more patterns (see
+.Sx Shell Patterns
+described later), separated by
+.Dq \*(Ba
+characters.
+The
+.Do
+(
+.Dc
+character before the pattern is optional.
+.Ss Grouping Commands Together
+Commands may be grouped by writing either
+.Pp
+.Dl (list)
+.Pp
+or
+.Pp
+.Dl { list; }
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
