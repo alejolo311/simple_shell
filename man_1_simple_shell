@@ -266,6 +266,72 @@ would become
 .Pp
 .Dl ls -F foobar Aq return
 .Pp
+Aliases provide a convenient way for naive users to create shorthands for
+commands without having to learn how to create functions with arguments.
+They can also be used to create lexically obscure code.
+This use is discouraged.
+.Ss Commands
+The shell interprets the words it reads according to a language, the
+specification of which is outside the scope of this man page (refer to the
+BNF in the
+.Tn POSIX
+1003.2 document).
+Essentially though, a line is read and if the first
+word of the line (or after a control operator) is not a reserved word,
+then the shell has recognized a simple command.
+Otherwise, a complex
+command or some other special construct may have been recognized.
+.Ss Simple Commands
+If a simple command has been recognized, the shell performs
+the following actions:
+.Bl -enum -offset indent
+.It
+Leading words of the form
+.Dq name=value
+are stripped off and assigned to the environment of the simple command.
+Redirection operators and their arguments (as described below) are
+stripped off and saved for processing.
+.It
+The remaining words are expanded as described in
+the section called
+.Dq Expansions ,
+and the first remaining word is considered the command name and the
+command is located.
+The remaining words are considered the arguments of the command.
+If no command name resulted, then the
+.Dq name=value
+variable assignments recognized in item 1 affect the current shell.
+.It
+Redirections are performed as described in the next section.
+.El
+.Ss Redirections
+Redirections are used to change where a command reads its input or sends
+its output.
+In general, redirections open, close, or duplicate an
+existing reference to a file.
+The overall format used for redirection is:
+.Pp
+.Dl [n] Va redir-op Ar file
+.Pp
+where
+.Va redir-op
+is one of the redirection operators mentioned previously.
+Following is a list of the possible redirections.
+The
+.Bq n
+is an optional number, as in
+.Sq 3
+(not
+.Sq Bq 3 ) ,
+that refers to a file descriptor.
+.Bl -tag -width aaabsfiles -offset indent
+.It [n] Ns \*[Gt] file
+Redirect standard output (or n) to file.
+.It [n] Ns \*[Gt]| file
+Same, but override the
+.Fl C
+option.
+.It [n] Ns \*[Gt]\*[Gt] file
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
