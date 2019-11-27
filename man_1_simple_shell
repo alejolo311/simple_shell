@@ -621,6 +621,35 @@ or
 .Pp
 .Dl { list; }
 .Pp
+The first of these executes the commands in a subshell.
+Builtin commands grouped into a (list) will not affect the current shell.
+The second form does not fork another shell so is slightly more efficient.
+Grouping commands together this way allows you to redirect
+their output as though they were one program:
+.Pp
+.Bd -literal -offset indent
+{ printf \*q hello \*q ; printf \*q world\\n" ; } \*[Gt] greeting
+.Ed
+.Pp
+Note that
+.Dq }
+must follow a control operator (here,
+.Dq \&; )
+so that it is recognized as a reserved word and not as another command argument.
+.Ss Functions
+The syntax of a function definition is
+.Pp
+.Dl name ( ) command
+.Pp
+A function definition is an executable statement; when executed it
+installs a function named name and returns an exit status of zero.
+The command is normally a list enclosed between
+.Dq {
+and
+.Dq } .
+.Pp
+Variables may be declared to be local to a function by using a local
+command.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
