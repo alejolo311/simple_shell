@@ -20,7 +20,7 @@ int _unsetenv(char **argv, lenv_s **lenv, unsigned int *execnt)
 		for (i = 0; h; i++)
 		{
 			var = h->var;
-			if (strncmp(var, argv[2], strlen(argv[2])) == 0)
+			if (strncmp(var, argv[2], _strlen(argv[2])) == 0)
 			{
 				delete_node(lenv, i);
 				break;

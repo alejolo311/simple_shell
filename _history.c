@@ -28,7 +28,7 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL;
 	while (node != NULL)
 	{
 		sprintf(msg, "%5d %s\n", node->id, node->cmd);
-		write(STDOUT_FILENO, msg, strlen(msg));
+		write(STDOUT_FILENO, msg, _strlen(msg));
 		node = node->next;
 	}
 

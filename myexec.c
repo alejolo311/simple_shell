@@ -20,7 +20,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 	if (sentence == NULL)
 	{
 		sprintf(msg, "%s: %d: %s: not found\n", argv[0], *execnt, argv[1]);
-		write(STDERR_FILENO, &msg, strlen(msg));
+		write(STDERR_FILENO, &msg, _strlen(msg));
 		free(env);
 		return (EXIT_SUCCESS);
 	}
@@ -35,7 +35,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 		ret = execve(sentence, (argv + 1), env);
 		if (ret == -1)
 		{
-			exit(127);
+			exit(0);
 		}
 	}
 	else

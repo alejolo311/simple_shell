@@ -19,12 +19,12 @@ char msg[120];
 	if (_strcmp(av[2], "-d") == 0)
 	{
 		sprintf(msg, "exit - Exit the shell.\n");
-		write(STDOUT_FILENO, msg, strlen(msg));
+		write(STDOUT_FILENO, msg, _strlen(msg));
 	}
 	else if (_strcmp(av[2], "-s") == 0)
 	{
 		sprintf(msg, "exit: exit [n]\n");
-		write(STDOUT_FILENO, msg, strlen(msg));
+		write(STDOUT_FILENO, msg, _strlen(msg));
 	}
 	else
 		prn_hlpexit();
@@ -49,7 +49,7 @@ NULL
 };
 
 	for (i = 0; msg[i] != NULL; i++)
-		write(STDOUT_FILENO, msg[i], strlen(msg[i]));
+		write(STDOUT_FILENO, msg[i], _strlen(msg[i]));
 
 	return (EXIT_SUCCESS);
 }

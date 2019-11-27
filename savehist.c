@@ -28,7 +28,7 @@ commhist_s *head = NULL, *tail = NULL, *node = NULL, *deno = NULL;
 	node = head;
 	while (node != NULL)
 	{
-		qty = write(fd, node->cmd, strlen(node->cmd));
+		qty = write(fd, node->cmd, _strlen(node->cmd));
 		if (qty < 1)
 			return (-1);
 		qty = write(fd, &nl, 1);
