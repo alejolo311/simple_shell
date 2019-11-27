@@ -414,6 +414,33 @@ number as a "shell procedure".
 When locating a command, the shell first looks to see if it has a shell
 function by that name.
 Then it looks for a builtin command by that name.
+If a builtin command is not found, one of two things happen:
+.Bl -enum
+.It
+Command names containing a slash are simply executed without performing
+any searches.
+.It
+The shell searches each entry in
+.Ev PATH
+in turn for the command.
+The value of the
+.Ev PATH
+variable should be a series of entries separated by colons.
+Each entry consists of a directory name.
+The current directory may be indicated
+implicitly by an empty directory name, or explicitly by a single period.
+.El
+.Ss Command Exit Status
+Each command has an exit status that can influence the behaviour
+of other shell commands.
+The paradigm is that a command exits
+with zero for normal or success, and non-zero for failure,
+error, or a false indication.
+The man page for each command
+should indicate the various exit codes and what they mean.
+Additionally, the builtin commands return exit codes, as does
+an executed shell function.
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
