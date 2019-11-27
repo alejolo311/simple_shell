@@ -900,6 +900,101 @@ The word is expanded to produce a pattern.
 The parameter expansion then results in parameter, with the largest
 portion of the prefix matched by the pattern deleted.
 .El
+.Ss Command Substitution
+Command substitution allows the output of a command to be substituted in
+place of the command name itself.
+Command substitution occurs when the command is enclosed as follows:
+.Pp
+.Dl $(command)
+.Pp
+or
+.Po
+.Dq backquoted
+version
+.Pc :
+.Pp
+.Dl `command`
+.Pp
+The shell expands the command substitution by executing command in a
+subshell environment and replacing the command substitution with the
+standard output of the command, removing sequences of one or more
+.Ao newline Ac Ns s
+at the end of the substitution.
+(Embedded
+.Ao newline Ac Ns s
+before
+the end of the output are not removed; however, during field splitting,
+they may be translated into
+.Ao space Ac Ns s ,
+depending on the value of
+.Ev IFS
+and quoting that is in effect.)
+.Ss Arithmetic Expansion
+Arithmetic expansion provides a mechanism for evaluating an arithmetic
+expression and substituting its value.
+The format for arithmetic expansion is as follows:
+.Pp
+.Dl $((expression))
+.Pp
+The expression is treated as if it were in double-quotes, except
+that a double-quote inside the expression is not treated specially.
+The shell expands all tokens in the expression for parameter expansion,
+command substitution, and quote removal.
+.Pp
+Next, the shell treats this as an arithmetic expression and
+substitutes the value of the expression.
+.Ss White Space Splitting (Field Splitting)
+After parameter expansion, command substitution, and
+arithmetic expansion the shell scans the results of
+expansions and substitutions that did not occur in double-quotes for
+field splitting and multiple fields can result.
+.Pp
+The shell treats each character of the
+.Ev IFS
+as a delimiter and uses the delimiters to split the results of parameter
+expansion and command substitution into fields.
+.Ss Pathname Expansion (File Name Generation)
+Unless the
+.Fl f
+flag is set, file name generation is performed after word splitting is
+complete.
+Each word is viewed as a series of patterns, separated by slashes.
+The process of expansion replaces the word with the names of all
+existing files whose names can be formed by replacing each pattern with a
+string that matches the specified pattern.
+There are two restrictions on
+this: first, a pattern cannot match a string containing a slash, and
+second, a pattern cannot match a string starting with a period unless the
+first character of the pattern is a period.
+The next section describes the
+patterns used for both Pathname Expansion and the
+.Ic case
+command.
+.Ss Shell Patterns
+A pattern consists of normal characters, which match themselves,
+and meta-characters.
+The meta-characters are
+.Dq \&! ,
+.Dq * ,
+.Dq \&? ,
+and
+.Dq \&[ .
+These characters lose their special meanings if they are quoted.
+When command or variable substitution is performed
+and the dollar sign or back quotes are not double quoted,
+the value of the variable or the output of
+the command is scanned for these characters and they are turned into
+meta-characters.
+.Pp
+An asterisk
+.Pq Dq *
+matches any string of characters.
+A question mark matches any single character.
+A left bracket
+.Pq Dq \&[
+introduces a character class.
+The end of the character class is indicated by a
+.Pq Dq \&] ;
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
