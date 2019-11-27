@@ -1268,6 +1268,71 @@ The following environment variables affect the execution of fc:
 Name of the editor to use.
 .It Ev HISTSIZE
 The number of previous commands that are accessible.
+.El
+.It fg Op Ar job
+Move the specified job or the current job to the foreground.
+.It getopts Ar optstring var
+The
+.Tn POSIX
+.Ic getopts
+command, not to be confused with the
+.Em Bell Labs
+-derived
+.Xr getopt 1 .
+.Pp
+The first argument should be a series of letters, each of which may be
+optionally followed by a colon to indicate that the option requires an
+argument.
+The variable specified is set to the parsed option.
+.Pp
+The
+.Ic getopts
+command deprecates the older
+.Xr getopt 1
+utility due to its handling of arguments containing whitespace.
+.Pp
+The
+.Ic getopts
+builtin may be used to obtain options and their arguments
+from a list of parameters.
+When invoked,
+.Ic getopts
+places the value of the next option from the option string in the list in
+the shell variable specified by
+.Va var
+and its index in the shell variable
+.Ev OPTIND .
+When the shell is invoked,
+.Ev OPTIND
+is initialized to 1.
+For each option that requires an argument, the
+.Ic getopts
+builtin will place it in the shell variable
+.Ev OPTARG .
+If an option is not allowed for in the
+.Va optstring ,
+then
+.Ev OPTARG
+will be unset.
+.Pp
+.Va optstring
+is a string of recognized option letters (see
+.Xr getopt 3 ) .
+If a letter is followed by a colon, the option is expected to have an
+argument which may or may not be separated from it by white space.
+If an option character is not found where expected,
+.Ic getopts
+will set the variable
+.Va var
+to a
+.Dq \&? ;
+.Ic getopts
+will then unset
+.Ev OPTARG
+and write output to standard error.
+By specifying a colon as the first character of
+.Va optstring
+all errors will be ignored.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
