@@ -1077,6 +1077,98 @@ of utilities, the name for builtins or the expansion of aliases.
 .El
 .It cd Ar -
 .It Xo cd Op Fl LP
+.Op Ar directory
+.Xc
+Switch to the specified directory (default
+.Ev HOME ) .
+If an entry for
+.Ev CDPATH
+appears in the environment of the
+.Ic cd
+command or the shell variable
+.Ev CDPATH
+is set and the directory name does not begin with a slash, then the
+directories listed in
+.Ev CDPATH
+will be searched for the specified directory.
+The format of
+.Ev CDPATH
+is the same as that of
+.Ev PATH .
+If a single dash is specified as the argument, it will be replaced by the
+value of
+.Ev OLDPWD .
+The
+.Ic cd
+command will print out the name of the
+directory that it actually switched to if this is different from the name
+that the user gave.
+These may be different either because the
+.Ev CDPATH
+anism was used or because the argument is a single dash.
+The
+.Fl P
+option causes the physical directory structure to be used, that is, all
+symbolic links are resolved to their respective values.  The
+.Fl L
+option turns off the effect of any preceding
+.Fl P
+options.
+.It Xo echo Op Fl n
+.Ar args...
+.Xc
+Print the arguments on the standard output, separated by spaces.
+Unless the
+.Fl n
+option is present, a newline is output following the arguments.
+.Pp
+If any of the following sequences of characters is encountered during
+output, the sequence is not output.  Instead, the specified action is
+performed:
+.Bl -tag -width indent
+.It Li \eb
+A backspace character is output.
+.It Li \ec
+Subsequent output is suppressed.  This is normally used at the end of the
+last argument to suppress the trailing newline that
+.Ic echo
+would otherwise output.
+.It Li \ef
+Output a form feed.
+.It Li \en
+Output a newline character.
+.It Li \er
+Output a carriage return.
+.It Li \et
+Output a (horizontal) tab character.
+.It Li \ev
+Output a vertical tab.
+.It Li \e0 Ns Ar digits
+Output the character whose value is given by zero to three octal digits.
+If there are zero digits, a nul character is output.
+.It Li \e\e
+Output a backslash.
+.El
+.Pp
+All other backslash sequences elicit undefined behaviour.
+.It eval Ar string ...
+Concatenate all the arguments with spaces.
+Then re-parse and execute the command.
+.It exec Op Ar command arg ...
+Unless command is omitted, the shell process is replaced with the
+specified program (which must be a real program, not a shell builtin or
+function).
+Any redirections on the
+.Ic exec
+command are marked as permanent, so that they are not undone when the
+.Ic exec
+command finishes.
+.It exit Op Ar exitstatus
+Terminate the shell process.
+If
+.Ar exitstatus
+is given it is used as the exit status of the shell; otherwise the
+exit status of the preceding command is used.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
