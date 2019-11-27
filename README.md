@@ -32,7 +32,7 @@ This project was built by Alejandro López and Gonzalo Gomez Millan.
 - Your C programs and functions will be compiled with gcc 4.8.4
 - Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
 - No more than 5 functions per file
- 
+
 ### Flags to compile
 
 `$ gcc -Wall -Werror -Wextra -pedantic *.c`

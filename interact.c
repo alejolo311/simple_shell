@@ -22,7 +22,7 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		if (read == -1)
 		{	read == -1 && inter == 1 ? write(1, "\n", 1) : read;
 			free(line);
-			return (EXIT_SUCCESS);
+			return (ret);
 		}
 		myline = _strdup(line);
 		tmp = _strdup(myline);
@@ -43,15 +43,16 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		{	builtin = f(argv, lenv, execnt);
 			if (_strncmp(myline, "exit", 4) == 0 && builtin >= 0)
 			{	free(argv), free(tmp), free(myline), free(line);
-				return (builtin);
+				return (ret);
 			}
+			ret = builtin;
 		}
 		else
 			argc > 2 ? ret = myexec(j, argv, lenv, execnt) : argc;
 		addhist(argv), free(argv), free(tmp), free(myline), (*execnt)++;
-		if (ret == 127 && inter == 0)
+		if ((ret == 127 || ret == 126 || ret == 2) && inter == 0)
 		{	free(line);
-			return (127);
+			return (ret);
 		}
 	} while (1);
 	free(myline), free(line);
