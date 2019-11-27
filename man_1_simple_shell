@@ -245,6 +245,27 @@ The following are reserved words:
 .It do Ta done Ta until Ta if Ta esac
 .El
 .Pp
+Their meaning is discussed later.
+.Ss Aliases
+An alias is a name and corresponding value set using the
+.Xr alias 1
+builtin command.
+Whenever a reserved word may occur (see above),
+and after checking for reserved words, the shell
+checks the word to see if it matches an alias.
+If it does, it replaces it in the input stream with its value.
+For example, if there is an alias called
+.Dq lf
+with the value
+.Dq "ls -F" ,
+then the input:
+.Pp
+.Dl lf foobar Aq return
+.Pp
+would become
+.Pp
+.Dl ls -F foobar Aq return
+.Pp
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
