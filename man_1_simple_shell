@@ -1333,6 +1333,140 @@ and write output to standard error.
 By specifying a colon as the first character of
 .Va optstring
 all errors will be ignored.
+.Pp
+A nonzero value is returned when the last option is reached.
+If there are no remaining arguments,
+.Ic getopts
+will set
+.Va var
+to the special option,
+.Dq -- ,
+otherwise, it will set
+.Va var
+to
+.Dq \&? .
+.Pp
+The following code fragment shows how one might process the arguments
+for a command that can take the options
+.Op a
+and
+.Op b ,
+and the option
+.Op c ,
+which requires an argument.
+.Pp
+.Bd -literal -offset indent
+while getopts abc: f
+do
+    case $f in
+    a | b)  flag=$f;;
+    c)  carg=$OPTARG;;
+    \\?)    echo $USAGE; exit 1;;
+    esac
+done
+shift `expr $OPTIND - 1`
+.Ed
+.Pp
+This code will accept any of the following as equivalent:
+.Pp
+.Bd -literal -offset indent
+cmd \-acarg file file
+cmd \-a \-c arg file file
+cmd \-carg -a file file
+cmd \-a \-carg \-\- file file
+.Ed
+.It hash Fl rv Ar command ...
+The shell maintains a hash table which remembers the
+locations of commands.
+With no arguments whatsoever,
+the
+.Ic hash
+command prints out the contents of this table.
+Entries which have not been looked at since the last
+.Ic cd
+command are marked with an asterisk; it is possible for these entries
+to be invalid.
+.Pp
+With arguments, the
+.Ic hash
+command removes the specified commands from the hash table (unless
+they are functions) and then locates them.
+With the
+.Fl v
+option, hash prints the locations of the commands as it finds them.
+The
+.Fl r
+option causes the hash command to delete all the entries in the hash table
+except for functions.
+.It pwd Op Fl LP
+builtin command remembers what the current directory
+is rather than recomputing it each time.
+This makes it faster.
+However, if the current directory is renamed, the builtin version of
+.Ic pwd
+will continue to print the old name for the directory.
+The
+.Fl P
+option causes the physical value of the current working directory to be shown,
+that is, all symbolic links are resolved to their respective values.  The
+.Fl L
+option turns off the effect of any preceding
+.Fl P
+options.
+.It Xo read Op Fl p Ar prompt
+.Op Fl r
+.Ar variable
+.Op Ar ...
+.Xc
+The prompt is printed if the
+.Fl p
+option is specified and the standard input is a terminal.
+Then a line is read from the standard input.
+The trailing newline is deleted from the
+line and the line is split as described in the section on word splitting
+above, and the pieces are assigned to the variables in order.
+At least one variable must be specified.
+If there are more pieces than variables, the remaining pieces
+(along with the characters in
+.Ev IFS
+that separated them) are assigned to the last variable.
+If there are more variables than pieces,
+the remaining variables are assigned the null string.
+The
+.Ic read
+builtin will indicate success unless EOF is encountered on input, in
+which case failure is returned.
+.Pp
+By default, unless the
+.Fl r
+option is specified, the backslash
+.Dq \e
+acts as an escape character, causing the following character to be treated
+literally.
+If a backslash is followed by a newline, the backslash and the
+newline will be deleted.
+.It readonly Ar name ...
+.It readonly Fl p
+The specified names are marked as read only, so that they cannot be
+subsequently modified or unset.
+The shell allows the value of a variable
+to be set at the same time it is marked read only by writing
+.Pp
+.Dl readonly name=value
+.Pp
+With no arguments the readonly command lists the names of all read only
+variables.
+With the
+.Fl p
+option specified the output will be formatted suitably for non-interactive use.
+.Pp
+.It Xo printf Ar format
+.Op Ar arguments  ...
+.Xc
+.Ic printf
+formats and prints its arguments, after the first, under control
+of the
+.Ar format  .
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
