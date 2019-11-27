@@ -17,16 +17,18 @@ The current version of
 .Nm
 is in the process of being changed to conform with the
 .Tn POSIX
-1003.2 and 1003.2a specifications for the shell.
+1003.2 and 1003.2a specifications for the shell (Near).
 This version has many
-features which make it appear similar in some respects to the Korn shell,
-but it is not a Korn shell clone (see
-.Xr ksh 1 ) .
+features which make it appear similar in some respects to the Bash shell,
+but it is not a Bash shell clone (see
+.Xr sh 1 ) .
 Only features designated by
 .Tn POSIX ,
-plus a few Berkeley extensions, are being incorporated into this shell.
+plus a few Berkeley extensions, are being incorporated into this shell (Some of them).
 This man page is not intended
-to be a tutorial or a complete specification of the shell.
+to be a tutorial or a complete specification of the shell
+and SOME OF THE FEATURES treated in this document are
+implemented and OTHERS are in progress.
 .Ss Overview
 The shell is a command that reads lines from either a file or the
 terminal, interprets them, and generally executes other commands.
@@ -61,37 +63,7 @@ the shell is also considered
 a login shell.
 This is normally done automatically by the system
 when the user first logs in.
-A login shell first reads commands
-from the files
-.Pa /etc/profile
-and
-.Pa .profile
-if they exist.
-If the environment variable
-.Ev ENV
-is set on entry to an interactive shell, or is set in the
-.Pa .profile
-of a login shell, the shell next reads
-commands from the file named in
-.Ev ENV .
-Therefore, a user should place commands that are to be executed only at
-login time in the
-.Pa .profile
-file, and commands that are executed for every interactive shell inside the
-.Ev ENV
-file.
-To set the
-.Ev ENV
-variable to some file, place the following line in your
-.Pa .profile
-of your home directory
-.Pp
-.Dl ENV=$HOME/.shinit; export ENV
-.Pp
-substituting for
-.Dq .shinit
-any filename you wish.
-.Pp
+.\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
 .\" .Sh IMPLEMENTATION NOTES
