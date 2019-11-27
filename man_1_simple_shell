@@ -1202,6 +1202,39 @@ to an interactive shell.
 Use the editor named by editor to edit the commands.
 The editor string is a command name, subject to search via the
 .Ev PATH
+variable.
+The value in the
+.Ev FCEDIT
+variable is used as a default when
+.Fl e
+is not specified.
+If
+.Ev FCEDIT
+is null or unset, the value of the
+.Ev EDITOR
+variable is used.
+If
+.Ev EDITOR
+is null or unset,
+.Xr ed 1
+is used as the editor.
+.It Fl l No (ell)
+List the commands rather than invoking an editor on them.
+The commands are written in the sequence indicated by
+the first and last operands, as affected by
+.Fl r ,
+with each command preceded by the command number.
+.It Fl n
+Suppress command numbers when listing with -l.
+.It Fl r
+Reverse the order of the commands listed (with
+.Fl l )
+or edited (with neither
+.Fl l
+nor
+.Fl s ) .
+.It Fl s
+Re-execute the command without invoking an editor.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
