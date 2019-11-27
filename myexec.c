@@ -16,7 +16,7 @@ int myexec(int argc, char **argv, lenv_s **lenv, unsigned int *execnt)
 	struct stat st;
 
 	st.st_mode = 0, (void) argc, pathos = _getenv("PATH", lenv);
-	if (_strncmp(pathos, ":", 1) == 0)
+	if (_strncmp(pathos, ":", 1) == 0 || pathos == NULL)
 	{	tmp = _strdup(argv[1]), sentence = tmp;
 		if (access(sentence, F_OK | R_OK | X_OK) == -1)
 			free(tmp), sentence = NULL;

@@ -17,7 +17,8 @@ static char **paths, *pa;
 	{	free(pa), free(paths), free(env);
 		return (NULL);
 	}
-	if (access(name, F_OK | R_OK | X_OK) == 0 && name[0] == '/')
+	if (access(name, F_OK | R_OK | X_OK) == 0 &&
+			(name[0] == '/' || name[0] == '.'))
 	{	free(env);
 		return (_strdup(name));
 	}
@@ -26,18 +27,19 @@ static char **paths, *pa;
 		for (i = 0; env[i] != NULL; i++)
 			if (_strncmp(env[i], "PATH", 4) == 0)
 				break;
-		tmp = _strdup(env[i]);
+		if (env[i] == NULL)
+		{	free(env);
+			return (NULL);
+		} tmp = _strdup(env[i]);
 		for (k = 1, str1 = tmp; (token = strtok(str1, ":")); k++, str1 = NULL)
 			if (token == NULL)
 				break;
-		free(tmp), pa = _strdup(env[i]);
-		paths = malloc(k * sizeof(char **));
+		free(tmp), pa = _strdup(env[i]), paths = malloc(k * sizeof(char **));
 		for (j = 0, str1 = (pa + 5); ; j++, str1 = NULL)
 		{	paths[j] = strtok(str1, ":");
 			if (paths[j] == NULL)
 				break;	}
-	}
-	for (k = 0; paths[k] != NULL; k++)
+	} for (k = 0; paths[k] != NULL; k++)
 	{	tmp = malloc((_strlen(paths[k]) + _strlen(name) + 2) * sizeof(char));
 		sprintf(tmp, "%s/%s", paths[k], name);
 		if (access(tmp, F_OK | R_OK | X_OK) == 0)
