@@ -103,4 +103,8 @@ int inputfile(int argc, char **argv, lenv_s **lenv, unsigned int *execnt);
 char **check_variable(char **argv, lenv_s **lenv);
 
 
+/* Int funcs */
+int _atoi(char *s);
+
+
 #endif /* H_SHELL */
