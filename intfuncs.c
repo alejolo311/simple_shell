@@ -29,3 +29,23 @@ int _atoi(char *s)
 	}
 	return (number * sign);
 }
+/**
+ * _isdigit - this function says if a string is a digit
+ * @s: the string to proccess
+ * a blank line
+ * Description: this function says if a string is a digit
+ * section header: the header of this function is hsh.h
+ * Return: return 1 if c is a digit and 0 in other cases.
+*/
+int _isdigit(char *s)
+{
+	int i;
+
+	if (s == NULL)
+		return (-1);
+
+	for (i = 0; s[i] != '\0'; i++)
+		if (s[i] < 47 || s[i] > 58)
+			return (0);
+	return (1);
+}

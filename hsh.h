@@ -105,6 +105,6 @@ char **check_variable(char **argv, lenv_s **lenv);
 
 /* Int funcs */
 int _atoi(char *s);
-
+int _isdigit(char *s);
 
 #endif /* H_SHELL */
