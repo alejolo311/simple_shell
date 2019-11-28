@@ -12,7 +12,7 @@ unsigned int i;
 int j, k;
 char *str1, *token, *tmp = NULL, **env = menv(lenv);
 static char **paths, *pa;
-
+printf("llego al path\n");
 	if (_strncmp(name, "FLUSH", 5) == 0)
 	{	free(pa), free(paths), free(env);
 		return (NULL);
