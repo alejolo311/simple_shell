@@ -1,5 +1,5 @@
 .\" The following commands are required for all man pages.
-.Dd December 28, 2019
+.Dd November 28, 2019
 .Dt HSH 1 SMM
 .Os Ubuntu_Linux 14.04
 .Sh NAME
@@ -2261,17 +2261,17 @@ possible.
 .Nm
 is a direct descendant of the NetBSD version of ash (the Almquist SHell),
 ported to Linux in early 1997.
-It was renamed to
+It was renamed to sh in 2002.
+In 2019 
 .Nm
-in 2002.
-.Nm
-Holberton School implementation
+Holberton School implementation born as part of a new Silicon Valley educational process for
+Software Engineers.
 .Sh AUTHORS
 Alejandro Lopez
-.An -split
+.An
 - Gonzalo Gomez Millan
 .Sh BUGS
-According to the checker 7 bugs.
+According to the checker 3 bugs.
 .\" ============================================================================================
 .\" The following commands should be uncommented and
 .\" used where appropriate.
