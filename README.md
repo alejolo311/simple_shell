@@ -7,7 +7,7 @@ This project was built by Alejandro López and Gonzalo Gomez Millan.
 # Table of Contents
 1. [Authors](#Authors)
 2. [How Use](#How-Use)
-3. [Tasks](#Tasks)
+3. .[explanation](#Explanation)
 
 # Authors
 
@@ -37,4 +37,18 @@ This project was built by Alejandro López and Gonzalo Gomez Millan.
 
 `$ gcc -Wall -Werror -Wextra -pedantic *.c`
 
+## Explanation
 
+
+## Non interactive
+
+pass the commands in the stdin but no prints the prompt.
+
+`$ echo "ls" | ./hsh`
+
+## interactive
+
+the program is execute and the prompt is print, and wait for the user.
+
+`$ ./hsh`
+`($)`

@@ -9,15 +9,22 @@
  */
 int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 {
-	int ret = 0;
+	int ret = 0, pos = 2;
 	char msg[80];
-	(void) lenv;
 
-	if (argv[2] == NULL)
+	(void) lenv;
+	if (argv[pos] == NULL)
 		return (0);
-	ret = _atoi(argv[2]);
-	printf("%d", ret);
-	if (ret <= 0)
+	if (_isdigit(argv[2]) == 1)
+		ret = _atoi(argv[pos]);
+	else
+	{
+		sprintf(msg, "%s: %d: %s: Illegal Number: %s\n",
+					argv[0], *e, argv[1], argv[2]);
+		write(STDERR_FILENO, &msg, _strlen(msg));
+		return (2);
+	}
+	if (ret < 0)
 	{
 		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *e, argv[1], ret);
 		write(STDERR_FILENO, &msg, _strlen(msg));
