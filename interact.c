@@ -43,6 +43,8 @@ char *str1, *t, **argv, *line = NULL, *tmp = NULL, *myline = NULL;
 		{	builtin = f(argv, lenv, execnt);
 			if (_strncmp(myline, "exit", 4) == 0 && builtin >= 0)
 			{	free(argv), free(tmp), free(myline), free(line);
+				if (argv[2] != NULL)
+					return (builtin);
 				return (ret);
 			}
 			ret = builtin;

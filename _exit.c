@@ -21,6 +21,10 @@ int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *e, argv[1], ret);
 		write(STDERR_FILENO, &msg, _strlen(msg));
 	}
+	else if (ret > 255)
+	{
+		ret = ret % 256;
+	}
 
 	return (ret);
 }
