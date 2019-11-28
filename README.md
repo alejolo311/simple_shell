@@ -7,7 +7,7 @@ This project was built by Alejandro López and Gonzalo Gomez Millan.
 # Table of Contents
 1. [Authors](#Authors)
 2. [How Use](#How-Use)
-3. .[explanation]. (#Explanation)
+3. .[explanation](#Explanation)
 
 # Authors
 
@@ -51,14 +51,4 @@ pass the commands in the stdin but no prints the prompt.
 the program is execute and the prompt is print, and wait for the user.
 
 `$ ./hsh`
-
 `($)`
-
-
-```
-
-
-
-
-
-
