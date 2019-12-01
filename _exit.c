@@ -19,14 +19,14 @@ int _ex(char **argv, lenv_s **lenv, unsigned int *e)
 		ret = _atoi(argv[pos]);
 	else
 	{
-		sprintf(msg, "%s: %d: %s: Illegal Number: %s\n",
+		sprintf(msg, "%s: %d: %s: Illegal number: %s\n",
 					argv[0], *e, argv[1], argv[2]);
 		write(STDERR_FILENO, &msg, _strlen(msg));
 		return (2);
 	}
 	if (ret < 0)
 	{
-		sprintf(msg, "%s: %d: %s: Illegal Number: %d\n", argv[0], *e, argv[1], ret);
+		sprintf(msg, "%s: %d: %s: Illegal number: %d\n", argv[0], *e, argv[1], ret);
 		write(STDERR_FILENO, &msg, _strlen(msg));
 		ret = 2;
 	}
