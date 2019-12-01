@@ -9,5 +9,5 @@
 void handsigint(int sign)
 {
 	(void) sign;
-	/* write(STDIN_FILENO, " \n", 2); */
+	write(STDIN_FILENO, "($) \n", 5);
 }
