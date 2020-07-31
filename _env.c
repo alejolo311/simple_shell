@@ -9,7 +9,6 @@
  */
 int _env(char **argv, lenv_s **lenv, unsigned int *execnt)
 {
-	int i, len;
 
 	(void) argv;
 	(void) execnt;
