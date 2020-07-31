@@ -12,7 +12,7 @@ lenv_s *cenv(char **env)
 	lenv_s *lenv;
 
 	lenv = NULL;
-	for (i = 1; env[i] != NULL; i++)
+	for (i = 0; env[i] != NULL; i++)
 	{
 		add_node(&lenv, env[i]);
 	}
